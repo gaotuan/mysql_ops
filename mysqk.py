@@ -1,6 +1,5 @@
 # coding: utf-8
 
-import MySQLdb
 import pymysql
 import os, sys, time, datetime
 import subprocess
@@ -31,9 +30,8 @@ handler = TimedRotatingFileHandler(LOG_FILE, when='d', interval=1, backupCount=7
 formatter = logging.Formatter('%(asctime)s [%(levelname)-7s] %(threadName)6s >> %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-work_dir='D:\\deploy\\test3\\mykill'
+work_dir='D:\\deploy\\test3\\mykill\\'
 
-filterwarnings('ignore', category=MySQLdb.Warning)
 
 THREAD_DATA = local()
 KEY_DB_AUTH = "1111111111111111"
@@ -87,7 +85,7 @@ def get_setttings(sect, opt=''):
 # get processlist to check connection session
 #
 def get_processlist_kthreads(conn, kill_opt, db_id):
-    processlist_file = work_dir+'\processlist_' + db_id + '.txt'
+    processlist_file = work_dir+'processlist_' + db_id + '.txt'
     logger.debug("get the information_schema.processlist on this moment: %s", processlist_file)
 
     threads_tokill = defaultdict(list)
@@ -287,7 +285,7 @@ def kill_threads(threads_tokill, db_conns, db_id, db_commconfig):
                 cur = db_conns[u].cursor()
                 cur.execute(kill_str)
                 logger.warn("(%s) kill-command has been executed : %s", u, kill_str)
-            except MySQLdb.Error as  e:
+            except pymysql.err.MySQLError as  e:
                 logger.critical('Error %d: %s', e.args[0], e.args[1])
                 cur.close()
         else:
