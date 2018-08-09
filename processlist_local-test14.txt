@@ -1,9 +1,0 @@
-
-
-################  Fri Jul 20 14:54:44 2018  ################
-
-            <style> .mytable,.mytable th,.mytable td {
-                font-size:0.8em;    text-align:left;    padding:4px;    border-collapse:collapse;
-            } </style>
-            <table class='mytable'> <tr><th>thread_id</th><th>user</th><th>host</th><th>db</th><th>command</th><th>time</th><th>state</th><th>info</th></tr> 
-        </table>
