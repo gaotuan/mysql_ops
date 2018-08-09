@@ -21,10 +21,11 @@ from logging.handlers import TimedRotatingFileHandler
 import snapshot_report
 import traceback
 
+
 LOG_FILE = 'killquery.log'
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-logging.basicConfig(format='%(levelname)s:%(asctime)s--%(thread)s>>::%(message)s',level=logging.DEBUG)
+logging.basicConfig(format='%(levelname)s:%(asctime)s--%(thread)s>>::%(message)s',level=logging.INFO)
 #handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes=1024*1024, backupCount=5)
 handler = TimedRotatingFileHandler(LOG_FILE, when='d', interval=1, backupCount=7)
 formatter = logging.Formatter('%(asctime)s [%(levelname)-7s] %(threadName)6s >> %(message)s')
@@ -123,6 +124,37 @@ def get_processlist_kthreads(conn, kill_opt, db_id):
         cur.close()
 
     return threads_tokill
+
+#get active session
+def get_active_session(conn, db_id):
+    processlist_file = work_dir+'processlist_' + db_id + '.txt'
+    logger.debug("get active session from information_schema.processlist on this moment: %s", processlist_file)
+    try:
+        cur = conn.cursor()
+        sqlstr = "select   count(*),max(time),concat(SUBSTR(REPLACE(REPLACE(REPLACE(info, CHAR(10), ''), CHAR(13), ''),'  ',' ' )FROM 1 FOR 30),'||', REPLACE(REPLACE(substr(info,LOCATE('from',info)+4,30), CHAR(10), ''), CHAR(13), ''))  sub  " \
+                 "from information_schema.PROCESSLIST where info is not null  and id not in( select connection_id() )  " \
+                 "group by concat(SUBSTR(REPLACE(REPLACE(REPLACE(info, CHAR(10), ''), CHAR(13), ''),'  ',' ' )FROM 1 FOR 30),'||', REPLACE(REPLACE(substr(info,LOCATE('from',info)+4,30), CHAR(10), ''), CHAR(13), '')) order by 1;"
+        cur.execute(sqlstr)
+        rs = cur.fetchall()
+        fo=open(processlist_file,"w")
+        fo.write("\n\n################  " + time.asctime() + "  ################\n")
+        fo.write("""
+            <style> .mytable,.mytable th,.mytable td {
+                font-size:0.8em;    text-align:left;    padding:4px;    border-collapse:collapse;
+            } </style>
+            <table class='mytable'> <tr><th>count</th><th>max_time</th><th>sub_sql</th></tr> 
+        """)
+        for row in rs:
+            fo.write("<tr><td>" + "</td> <td>".join(map(str, row)) + "</td></tr>\n")
+        fo.write("</table>")
+    except Exception as e:
+        logging.critical("Get active processlist  error:$s",e)
+    finally:
+        cur.close()
+        fo.close()
+
+
+
 
 def db_reconnect(db_user, db_id):
     logging.debug("beging reconnect....")
@@ -249,7 +281,7 @@ def get_more_info(conn, threadName):
         snapshot_file_html = work_dir+"\snapshot_" + threadName + ".html"
         snapshot_html = snapshot_report.write_mail_content_html(snapshot_file_html, rs_0, rs_1, rs_2[2].replace('\n', '<br/>'))
         return snapshot_html  # filename
-    except MySQLdb.Error as  e:
+    except pymysql.err.MySQLError  as  e:
         logger.critical('Error %d: %s', e.args[0], e.args[1])
     finally:
         cur.close()
@@ -301,7 +333,7 @@ def kill_threads(threads_tokill, db_conns, db_id, db_commconfig):
         THREAD_DATA.THREADS_TOKILL[u] = thread_ids
 
 # 邮件通知模块
-def sendemail(db_id, dry_run, filename=''):
+def sendemail(db_id, dry_run, filename='',title='slow_query'):
     MAIL_CONFIG = get_setttings('mail_config')
     mail_receiver = MAIL_CONFIG['mail_receiver'].split(";")
     mailenv = MAIL_CONFIG['env']
@@ -318,10 +350,15 @@ def sendemail(db_id, dry_run, filename=''):
 
     message['From'] = Header('DBA', 'utf-8')
     message['To'] = Header('devops', 'utf-8')
-    subject = '(%s) %s slow query has been take snapshot' % (mailenv, db_id)
+    if title=='act_session':
+        kill_opt = get_setttings("id_" + db_id)
+        subject = '(%s) %s active session has been take snapshot' % (mailenv, db_id)
+        message.attach(MIMEText('db有超过阀值的活动会话，阀值为:<strong>' + kill_opt['db_act_sess'] + '</strong> <br/>', 'html', 'utf-8'))
+    else:
+        subject = '(%s) %s slow query has been take snapshot' % (mailenv, db_id)
+        message.attach(MIMEText('db有慢查询, threads <strong>' + dry_run + '</strong> <br/>', 'html', 'utf-8'))
     message['Subject'] = Header(subject, 'utf-8')
 
-    message.attach(MIMEText('db有慢查询, threads <strong>' + dry_run + '</strong> <br/>', 'html', 'utf-8'))
     message.attach(MIMEText('<br/>You can find more info(snapshot) in the attachment : <strong> ' +
                             filename + ' </strong> processlist:<br/><br/>', 'html', 'utf-8'))
 
@@ -336,20 +373,48 @@ def sendemail(db_id, dry_run, filename=''):
     message.attach(att2)
 
     try:
-        print ("entry mail process:")
+        print ("entry mail process:%s"%title)
         smtpObj = smtplib.SMTP_SSL(mail_host, port=465, timeout=30)
         smtpObj.ehlo()
-        print ("email begin login...")
+        print ("email begin login...:%s"%title)
         smtpObj.login(mail_user, mail_pass)
-        print ("email login OK! begin send mail....")
+        print ("email login OK! begin send mail...:%s"%title)
         smtpObj.sendmail(mail_user, mail_receiver, message.as_string())
 
-        logger.info("Email sending succeed")
+        logger.info("Email sending succeed:%s"%title)
     except smtplib.SMTPException as  err:
-        logger.critical("Error email content: %s", message.as_string())
-        logger.critical("Error: 发送邮件失败(%s, %s)", err[0], err[1].__str__())
+        logger.critical("Error email content: :%s"%title)
+        logger.critical("Error: 发送邮件失败(%s, %s)", err.args[0], err.args[1].__str__())
+    except Exception as a:
+        logger.error("send mail fail %s",a)
     finally:
         smtpObj.quit()
+
+#检查活动的连接数
+def check_act_session(conn,kill_opt,db_id):
+    logger.debug("begin check active session  from  information_schema.processlist")
+    tim=None
+    try:
+        cur=conn.cursor()
+        sqlstr='select count(*) from information_schema.PROCESSLIST where info is not null;'
+        cur.execute(sqlstr)
+        max_cnt=int(kill_opt['db_act_sess'])
+        for i in cur.fetchall():
+            if i[0]>=max_cnt:
+                snapshot_html=get_more_info(conn,db_id)
+                get_active_session(conn, db_id)
+                sendemail(db_id, ' NOT KILLED', snapshot_html,'act_session')
+                tim=datetime.datetime.now()
+            else:
+                print("active session cnt:%d,config max cnt is:%d"%(i[0],max_cnt))
+
+    except Exception as e:
+        logging.critical("Get active session processlist connection error:%s",e)
+    finally:
+        cur.close()
+    return tim
+
+
 
 
 # for db_instance one python thread: main function
@@ -360,8 +425,7 @@ def my_slowquery_kill(db_instance):
 
     db_commconfig = get_setttings("db_commconfig")
 
-    # 获取具体的db_instance 选项kill
-    kill_opt = get_setttings("id_" + db_id)
+
 
     # 登录db认证信息
     #db_users = json.loads(db_commconfig["db_auth"])
@@ -411,9 +475,11 @@ def my_slowquery_kill(db_instance):
     kill_count = 0
     run_max_count_last = 0
     check_ping_wait = 0
-
+    tims = None
     while True:
         db_commconfig = get_setttings("db_commconfig")
+        # 获取具体的db_instance 选项kill
+        kill_opt = get_setttings("id_" + db_id)
 
         # 查看processlist连接的作为心跳
         # 如果数据库端 kill掉这个用户的连接，该实例检查则异常退出
@@ -444,6 +510,15 @@ def my_slowquery_kill(db_instance):
 
                 kill_count += 1
                 run_max_count_last = run_max_count
+                #begin check actie session
+                interval=int(kill_opt['db_act_check_interval'])
+                if tims ==None or (int((datetime.datetime.now()-tims).seconds)>=interval):
+                    tims=check_act_session(conn, kill_opt, db_id)
+                else:
+                    print("last check time is:%s,interval:%d,next check after %d seconds." %(tims,interval,(interval-int((datetime.datetime.now()-tims).seconds))))
+                    logging.debug("last check time is:%s,interval:%d,next check after %d seconds." %(tims,interval,(interval-int((datetime.datetime.now()-tims).seconds))))
+
+
         else:
             print ("Not running in time window")
             logger.debug("Not running in time window")
