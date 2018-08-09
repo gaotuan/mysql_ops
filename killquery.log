@@ -4061,3 +4061,22 @@
 2018-08-09 17:24:43,416 [DEBUG  ] local-test13 >> this threads COULD be killed: defaultdict(<class 'list'>, {'gaotuan': [32]})
 2018-08-09 17:24:43,417 [INFO   ] local-test13 >> (gaotuan) run in dry_run=1 mode , do not kill, but take status snapshot the first time
 2018-08-09 17:24:43,418 [DEBUG  ] local-test13 >> begin check active session  from  information_schema.processlist
+2018-08-09 17:31:29,334 [INFO   ] local-test13 >> Starting kill query Thread: local-test13
+2018-08-09 17:31:29,368 [DEBUG  ] local-test13 >> no section id_local-test13 found in mysqk.ini, use comm section
+2018-08-09 17:31:29,370 [INFO   ] local-test13 >> you've changed run_max_count, set a clean start
+2018-08-09 17:31:29,370 [DEBUG  ] local-test13 >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_local-test13.txt
+2018-08-09 17:31:29,397 [DEBUG  ] local-test13 >> this threads COULD be killed: defaultdict(<class 'list'>, {'gaotuan': [32]})
+2018-08-09 17:31:29,398 [INFO   ] local-test13 >> (gaotuan) run in dry_run=1 mode , do not kill, but take status snapshot the first time
+2018-08-09 17:31:29,398 [INFO   ] local-test13 >> Gather info before kill using the same connection START
+2018-08-09 17:31:29,398 [DEBUG  ] local-test13 >> Get 'show full processlist' to: D:\deploy\test3\mykill\\snapshot_local-test13.txt
+2018-08-09 17:31:29,403 [DEBUG  ] local-test13 >> Get 'innodb_lock_waits' to: D:\deploy\test3\mykill\\snapshot_local-test13.txt
+2018-08-09 17:31:29,412 [DEBUG  ] local-test13 >> Get 'show engine innodb status' to: D:\deploy\test3\mykill\\snapshot_local-test13.txt
+2018-08-09 17:31:33,374 [CRITICAL] local-test13 >> Error email content: :slow_query
+2018-08-09 17:31:33,375 [CRITICAL] local-test13 >> Error: ·¢ËÍÓÊ¼þÊ§°Ü(535, b'Error: authentication failed, system busy')
+2018-08-09 17:31:33,408 [DEBUG  ] local-test13 >> begin check active session  from  information_schema.processlist
+2018-08-09 17:31:35,427 [DEBUG  ] local-test13 >> no section id_local-test13 found in mysqk.ini, use comm section
+2018-08-09 17:31:35,438 [DEBUG  ] local-test13 >> no section id_local-test13 found in mysqk.ini, use comm section
+2018-08-09 17:31:35,439 [DEBUG  ] local-test13 >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_local-test13.txt
+2018-08-09 17:31:35,499 [DEBUG  ] local-test13 >> this threads COULD be killed: defaultdict(<class 'list'>, {'gaotuan': [32]})
+2018-08-09 17:31:35,502 [INFO   ] local-test13 >> (gaotuan) run in dry_run=1 mode , do not kill, but take status snapshot the first time
+2018-08-09 17:31:35,503 [DEBUG  ] local-test13 >> begin check active session  from  information_schema.processlist
