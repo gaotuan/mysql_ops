@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 # @author: rui.xu
 # @update: jt.huang
 # 这里使用pycrypto‎demo库
-# 安装方法 pip install pycrypto‎demo
+# 安装方法 pip install pycrypto
 
 from Crypto.Cipher import AES
 from binascii import b2a_hex, a2b_hex
@@ -48,8 +48,8 @@ class PrpCrypt(object):
 
 
 if __name__ == '__main__':
-    pc = PrpCrypt('keyskeyskeyskeys')  # 初始化密钥
-    e = pc.encrypt("testtesttest")  # 加密
+    pc = PrpCrypt('1111111111111111')  # 初始化密钥
+    e = pc.encrypt("PHOto@viVA1")  # 加密
     d = pc.decrypt(e)  # 解密
     print("加密:", e)
     print("解密:", d)

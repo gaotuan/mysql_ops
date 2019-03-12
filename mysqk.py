@@ -1,3 +1,4 @@
+
 # coding: utf-8
 #/usr/bin/env python3
 import pymysql
@@ -21,17 +22,17 @@ from logging.handlers import TimedRotatingFileHandler
 import snapshot_report
 import traceback
 
-
 LOG_FILE = 'killquery.log'
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
-logging.basicConfig(format='%(levelname)s:%(asctime)s--%(thread)s>>::%(message)s',level=logging.INFO)
+logging.basicConfig(format='%(levelname)s:%(asctime)s--%(thread)s>>::%(message)s',level=logging.DEBUG)
 #handler = logging.handlers.RotatingFileHandler(LOG_FILE, maxBytes=1024*1024, backupCount=5)
 handler = TimedRotatingFileHandler(LOG_FILE, when='d', interval=1, backupCount=7)
 formatter = logging.Formatter('%(asctime)s [%(levelname)-7s] %(threadName)6s >> %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-work_dir='D:\\deploy\\test3\\mykill\\'
+#work_dir='D:\\deploy\\test3\\mykill\\'
+work_dir='/home/tuantuangao/mysql_ops/tmpfile/'
 
 
 THREAD_DATA = local()
@@ -86,6 +87,9 @@ def get_setttings(sect, opt=''):
 # get processlist to check connection session
 #
 def get_processlist_kthreads(conn, kill_opt, db_id):
+    if conn is None:
+        logger.error("get db connection error %s")
+
     processlist_file = work_dir+'processlist_' + db_id + '.txt'
     logger.debug("get the information_schema.processlist on this moment: %s", processlist_file)
 
@@ -98,7 +102,7 @@ def get_processlist_kthreads(conn, kill_opt, db_id):
         rs = cur.fetchall()
 
     except Exception as   e:
-        logging.critical("Get processlist connection error. Wait ping alive to reconnect.")
+        logger.critical("Get processlist connection error. Wait ping alive to reconnect.")
     else:
         fo = open(processlist_file, "w")
         fo.write("\n\n################  " + time.asctime() + "  ################\n")
@@ -109,7 +113,7 @@ def get_processlist_kthreads(conn, kill_opt, db_id):
             <table class='mytable'> <tr><th>thread_id</th><th>user</th><th>host</th><th>db</th><th>command</th><th>time</th><th>state</th><th>info</th></tr> 
         """)
 
-        logging.info("check this conn thread according to kill_opt one by one")
+        logger.info("check this conn thread according to kill_opt one by one")
 
         for row in rs:
             iskill_thread = kill_judge(row, kill_opt)
@@ -148,7 +152,7 @@ def get_active_session(conn, db_id):
             fo.write("<tr><td>" + "</td> <td>".join(map(str, row)) + "</td></tr>\n")
         fo.write("</table>")
     except Exception as e:
-        logging.critical("Get active processlist  error:$s",e)
+        logger.critical("Get active processlist  error:$s",e)
     finally:
         cur.close()
         fo.close()
@@ -157,13 +161,13 @@ def get_active_session(conn, db_id):
 
 
 def db_reconnect(db_user, db_id):
-    logging.debug("beging reconnect....")
+    logger.debug("beging reconnect....")
     db_pass = settings.DB_AUTH[db_user]
     try:
         pc = prpcryptec.PrpCrypt(KEY_DB_AUTH)
         v_pass=pc.decrypt(db_pass)
     except Exception as a:
-        logging.error("prpcryptec error in reconnect: %s",a)
+        logger.error("prpcryptec error in reconnect: %s",a)
 
     db_instance = get_setttings("db_info", db_id)
     db_host, db_port = db_instance.replace(' ', '').split(':')
@@ -172,17 +176,17 @@ def db_reconnect(db_user, db_id):
 
     while not db_conn:
         try:
-            logging.debug("Reconnect Database %s: host='%s', user='%s, port=%s", db_id, db_host, db_user, db_port)
+            logger.debug("Reconnect Database %s: host='%s', user='%s, port=%s", db_id, db_host, db_user, db_port)
             db_conn = pymysql.connect(host=db_host, user=db_user, passwd=v_pass,database='', port=int(db_port))
 
         except pymysql.err.MySQLError  as  e:
 
             if e.args[0] in (2013, 2003):
-                logging.critical('Error find in reconnecting %d: %s', e.args[0], e.args[1])
-                logging.critical("Reconnect Error wait next time: Database %s: host='%s', user='%s, port=%s", db_id, db_host, db_user, db_port)
+                logger.critical('Error find in reconnecting %d: %s', e.args[0], e.args[1])
+                logger.critical("Reconnect Error wait next time: Database %s: host='%s', user='%s, port=%s", db_id, db_host, db_user, db_port)
 
         except Exception as inst:
-            logging.error('Reconnect error exit :%s',inst)
+            logger.error('Reconnect error exit :%s',inst)
             return
 
         time.sleep(10)
@@ -204,9 +208,9 @@ def kill_judge(row, kill_opt):
             return int(row[0])
         elif row[4] != 'Sleep':
             if 0 < int(kill_opt['k_longtime']) < row[5]:
-                if row[1] not in settings.DB_AUTH.keys():
-                    logger.debug("You may have set all users to kill, but %s is not in DB_AUTH list. Skip thread %d : %s ", row[1], row[0], row[7])
-                    return 0
+                #if row[1] not in settings.DB_AUTH.keys():
+                #    logger.debug("You may have set all users to kill, but %s is not in DB_AUTH list. Skip thread %d : %s ", row[1], row[0], row[7])
+                #    return 0
                 return int(row[0])
         return 0
     else:
@@ -249,7 +253,7 @@ def get_more_info(conn, threadName):
     try:
         cur = conn.cursor()
 
-        snapshot_file = work_dir+"\snapshot_" + threadName + ".txt"
+        snapshot_file = work_dir+"snapshot_" + threadName + ".txt"
         fo = open(snapshot_file, "a")
         fo.write("\n\n######################################################\n")
         fo.write("##############  " + time.asctime() + "  ##############\n")
@@ -278,7 +282,7 @@ def get_more_info(conn, threadName):
         fo.write(rs_2[2])
 
         fo.close()
-        snapshot_file_html = work_dir+"\snapshot_" + threadName + ".html"
+        snapshot_file_html = work_dir+"snapshot_" + threadName + ".html"
         snapshot_html = snapshot_report.write_mail_content_html(snapshot_file_html, rs_0, rs_1, rs_2[2].replace('\n', '<br/>'))
         return snapshot_html  # filename
     except pymysql.err.MySQLError  as  e:
@@ -310,16 +314,20 @@ def kill_threads(threads_tokill, db_conns, db_id, db_commconfig):
         if db_commconfig['dry_run'] == '0':
             try:
                 snapshot_html = get_more_info(db_conns[process_user], db_id)
-                print ("snapshot_html:",snapshot_html)
-                sendemail(db_id, ' (' + u + ') KILLED', snapshot_html)
-
                 logger.info("(%s) run in dry_run=0 mode , do really kill, but the status snapshot is taken", u)
-                cur = db_conns[u].cursor()
-                cur.execute(kill_str)
+                try:
+                    cur = db_conns[u].cursor()
+                    cur.execute(kill_str)
+                    sendemail(db_id, ' (' + u + ') KILLED', snapshot_html)
+                except Exception as e:
+                    logger.error("connection:%s not exists", u)
+                    sendemail(db_id, ' (' + u + ') Not KILLED,connection not exists ', snapshot_html)
+
                 logger.warn("(%s) kill-command has been executed : %s", u, kill_str)
             except pymysql.err.MySQLError as  e:
                 logger.critical('Error %d: %s', e.args[0], e.args[1])
                 cur.close()
+
         else:
             # dry_run模式下可能会反复或者同样需被kill的thread
             logger.info("(%s) run in dry_run=1 mode , do not kill, but take status snapshot the first time", u)
@@ -362,7 +370,7 @@ def sendemail(db_id, dry_run, filename='',title='slow_query'):
     message.attach(MIMEText('<br/>You can find more info(snapshot) in the attachment : <strong> ' +
                             filename + ' </strong> processlist:<br/><br/>', 'html', 'utf-8'))
 
-    with open(work_dir+'\processlist_'+db_id+'.txt', 'r')as f:
+    with open(work_dir+'processlist_'+db_id+'.txt', 'r')as f:
     # with open(filename, 'rb')as f:
         filecontent = f.readlines()
     att1 = MIMEText("<br/>".join(filecontent), 'html', 'utf-8')
@@ -374,7 +382,7 @@ def sendemail(db_id, dry_run, filename='',title='slow_query'):
 
     try:
         print ("entry mail process:%s"%title)
-        smtpObj = smtplib.SMTP_SSL(mail_host, port=465, timeout=30)
+        smtpObj = smtplib.SMTP_SSL(host=mail_host, port=465, timeout=30)
         smtpObj.ehlo()
         print ("email begin login...:%s"%title)
         smtpObj.login(mail_user, mail_pass)
@@ -383,7 +391,7 @@ def sendemail(db_id, dry_run, filename='',title='slow_query'):
 
         logger.info("Email sending succeed:%s"%title)
     except smtplib.SMTPException as  err:
-        logger.critical("Error email content: :%s"%title)
+        logger.critical("Error email content:%s ::%s"%(err,title))
         logger.critical("Error: 发送邮件失败(%s, %s)", err.args[0], err.args[1].__str__())
     except Exception as a:
         logger.error("send mail fail %s",a)
@@ -409,7 +417,7 @@ def check_act_session(conn,kill_opt,db_id):
                 print("active session cnt:%d,config max cnt is:%d"%(i[0],max_cnt))
 
     except Exception as e:
-        logging.critical("Get active session processlist connection error:%s",e)
+        logger.critical("Get active session processlist connection error:%s",e)
     finally:
         cur.close()
     return tim
@@ -437,35 +445,35 @@ def my_slowquery_kill(db_instance):
 
     # db连接密码解密
     pc = prpcryptec.PrpCrypt(KEY_DB_AUTH)
-    print ("--gaott1:",pc)
-    print ("--gaott1db_user:",db_users)
-    for db_user, db_pass in db_users.items():
+    for user in  db_users:
+        db_user,db_pass=user.split(':')
         print ("--gaott2:db_user:",db_user)
         print ("--gaott2:db_pass:",db_pass)
         try:
             try:
                 dbpass_de = pc.decrypt(db_pass)
             except Exception as e:
-                logging.error("decrypt fail for:%s-->%s", db_user, e)
-            conn = pymysql.connect(db_host,db_user,dbpass_de,'', int(db_port))
-
-            db_conns[db_user] = conn
-            logging.debug("connection is created: %s:%s  %s", db_host, db_port, db_user)
-        except pymysql.err.MySQLError as a :
-            if a.args[0] ==1045:
-                logging.error('conn error user not exist or password Is not correct:%s', a.args[1])
-                logging.error('User %s may not exist or password Is not correct in DB %s . Skip it for you.', db_user, db_host)
-                continue
-            if a.args[0] ==2003:
-                logging.error('conn error in  first time :target mysql server is wrong :%s', a.args[1])
-                return
+                logger.error("decrypt fail for:%s-->%s", db_user, e)
+            try:
+                conn = pymysql.connect(db_host,db_user,dbpass_de,'', int(db_port))
+                db_conns[db_user] = conn
+                logger.debug("connection is created: %s:%s  %s", db_host, db_port, db_user)
+            except pymysql.err.MySQLError as a :
+                logger.error('conn error user:%s in %s',db_user,db_id)
+                if a.args[0] ==1045:
+                    logger.error('conn error user not exist or password Is not correct:%s', a.args[1])
+                    logger.error('User %s may not exist or password Is not correct in DB %s . Skip it for you.', db_user, db_host)
+                    continue
+                if a.args[0] ==2003:
+                    logger.error('conn error in  first time :target mysql server is wrong :%s', a.args[1])
+                    return
 
         except Exception as  e:
             traceback.print_exc()
-            logging.error('Error find in conn: %s',e)
+            logger.error('Error find in conn: %s',e)
 
     if db_conns.__len__()==0:
-        logging.error('Not exists any usefull connet for:%s', db_id)
+        logger.error('Not exists any usefull connet for:%s', db_id)
         return
 
 
@@ -504,7 +512,11 @@ def my_slowquery_kill(db_instance):
 
             if kill_count < run_max_count:
                 #开始处理判断mysql线程
-                threads_tokill = get_processlist_kthreads(db_conns[db_commconfig['db_puser']], kill_opt, db_id)
+                try:
+                    threads_tokill = get_processlist_kthreads(db_conns[db_commconfig['db_puser']], kill_opt, db_id)
+                except  Exception as   e:
+                    logger.error("db_puser  not connect to db  exit.......")
+                    return
 
                 kill_threads(threads_tokill, db_conns, db_id, db_commconfig)
 
@@ -516,7 +528,7 @@ def my_slowquery_kill(db_instance):
                     tims=check_act_session(conn, kill_opt, db_id)
                 else:
                     print("last check time is:%s,interval:%d,next check after %d seconds." %(tims,interval,(interval-int((datetime.datetime.now()-tims).seconds))))
-                    logging.debug("last check time is:%s,interval:%d,next check after %d seconds." %(tims,interval,(interval-int((datetime.datetime.now()-tims).seconds))))
+                    logger.debug("last check time is:%s,interval:%d,next check after %d seconds." %(tims,interval,(interval-int((datetime.datetime.now()-tims).seconds))))
 
 
         else:
@@ -534,7 +546,7 @@ def my_slowquery_kill(db_instance):
                     logger.info("(%s) MySQL try ping to keep session alive", dc_user)
                     db_conns[dc_user].ping()
                 except Exception as  e:
-                    logging.critical('Error in  mysql ping :%s',e)
+                    logger.critical('Error in  mysql ping :%s',e)
                     db_conns[dc_user] = db_reconnect(dc_user, db_id)
 
             check_ping_wait = 0
@@ -566,4 +578,4 @@ if __name__ == '__main__':
         # threadName like dbnqqame_user
         thread_to_killquery = myThread(100, db_instance)
         thread_to_killquery.start()
-        time.sleep(10)
+        time.sleep(1)
