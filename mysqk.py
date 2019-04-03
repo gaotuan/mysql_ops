@@ -196,6 +196,8 @@ def db_reconnect(db_user, db_id):
 
 # judge this thread meet kill_opt or not
 def kill_judge(row, kill_opt):
+    if kill_opt['k_exclude'].search(str(row)):
+        logger.debug('skip row id:%s user:%s because kill exclude option find in k_exclude', row[0], row[1])
     if (row[1] in kill_opt['k_user'] or 'all' in kill_opt['k_user']) \
             and not kill_opt['k_exclude'].search(str(row)):  # exclude have high priority
 
@@ -455,9 +457,13 @@ def my_slowquery_kill(db_instance):
             except Exception as e:
                 logger.error("decrypt fail for:%s-->%s", db_user, e)
             try:
-                conn = pymysql.connect(db_host,db_user,dbpass_de,'', int(db_port))
-                db_conns[db_user] = conn
-                logger.debug("connection is created: %s:%s  %s", db_host, db_port, db_user)
+                if db_user not in db_conns.keys():
+                    conn = pymysql.connect(db_host,db_user,dbpass_de,'', int(db_port))
+                    db_conns[db_user] = conn
+                    logger.debug("connection is created: %s:%s  %s", db_host, db_port, db_user)
+                else:
+                    logger.debug('User %s all ready exists in connection ,skip this user for you ',db_user )
+
             except pymysql.err.MySQLError as a :
                 logger.error('conn error user:%s in %s',db_user,db_id)
                 if a.args[0] ==1045:
