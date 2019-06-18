@@ -31,8 +31,8 @@ handler = TimedRotatingFileHandler(LOG_FILE, when='d', interval=1, backupCount=7
 formatter = logging.Formatter('%(asctime)s [%(levelname)-7s] %(threadName)6s >> %(message)s')
 handler.setFormatter(formatter)
 logger.addHandler(handler)
-#work_dir='D:\\deploy\\test3\\mykill\\'
-work_dir='/home/tuantuangao/mysql_ops/tmpfile/'
+work_dir='D:\\deploy\\test3\\mykill\\'
+#work_dir='/home/tuantuangao/mysql_ops/tmpfile/'
 
 
 THREAD_DATA = local()
@@ -364,6 +364,15 @@ def sendemail(db_id, dry_run, filename='',title='slow_query'):
         kill_opt = get_setttings("id_" + db_id)
         subject = '(%s) %s active session has been take snapshot' % (mailenv, db_id)
         message.attach(MIMEText('db有超过阀值的活动会话，阀值为:<strong>' + kill_opt['db_act_sess'] + '</strong> <br/>', 'html', 'utf-8'))
+    elif title=='active_trx':
+        kill_opt = get_setttings("id_" + db_id)
+        subject = '(%s) %s active transaction has been take snapshot' % (mailenv, db_id)
+        message.attach(MIMEText('db有超过阀值的活动事务，阀值为:<strong>' + kill_opt['active_trx_max_cnt'] + '</strong> <br/>', 'html', 'utf-8'))
+    elif title=='trx_rseg_history_len':
+        kill_opt = get_setttings("id_" + db_id)
+        subject = '(%s) %s trx_rseg_history_len has been take snapshot' % (mailenv, db_id)
+        message.attach(MIMEText('db trx_rseg_history_len 超过阀值，阀值为:<strong>' + kill_opt['trx_rseg_history_len'] + '</strong> <br/>', 'html', 'utf-8'))
+
     else:
         subject = '(%s) %s slow query has been take snapshot' % (mailenv, db_id)
         message.attach(MIMEText('db有慢查询, threads <strong>' + dry_run + '</strong> <br/>', 'html', 'utf-8'))
@@ -416,7 +425,7 @@ def check_act_session(conn,kill_opt,db_id):
                 sendemail(db_id, ' NOT KILLED', snapshot_html,'act_session')
                 tim=datetime.datetime.now()
             else:
-                print("active session cnt:%d,config max cnt is:%d"%(i[0],max_cnt))
+                print("DB active session cnt:%d,config max cnt is:%d"%(i[0],max_cnt))
 
     except Exception as e:
         logger.critical("Get active session processlist connection error:%s",e)
@@ -424,6 +433,56 @@ def check_act_session(conn,kill_opt,db_id):
         cur.close()
     return tim
 
+#检查长时间没有提交的事物
+def check_act_trx(conn,kill_opt,db_id):
+    logger.debug("begin check active trx  from  information_schema.INNODB_TRX")
+    tim=None
+    try:
+        active_trx_max_time = int(kill_opt['active_trx_max_time'])
+        active_trx_max_cnt = int(kill_opt['active_trx_max_cnt'])
+        cur=conn.cursor()
+        sqlstr='select  count(*) from information_schema.INNODB_TRX  where timestampdiff(second,trx_started,now())>=%s'
+        cur.execute(sqlstr,active_trx_max_time)
+        i=cur.fetchone()
+
+        if i[0]>=active_trx_max_cnt:
+            snapshot_html=get_more_info(conn,db_id)
+            sendemail(db_id, ' NOT KILLED', snapshot_html,'active_trx')
+            tim=datetime.datetime.now()
+        else:
+            print("active session trx cnt:%d,config max cnt is:%d"%(i[0],active_trx_max_cnt))
+            logger.debug("active session trx cnt:%d,config max cnt is:%d"%(i[0],active_trx_max_cnt))
+
+    except Exception as e:
+        logger.critical("Get active trx processlist connection error:%s",e)
+    finally:
+        cur.close()
+    return tim
+
+#检查trx_rseg_history_len
+def check_trx_rseg_history_len(conn,kill_opt,db_id):
+    logger.debug("begin check check_trx_rseg_history_len from  information_schema.innodb_metrics")
+    tim=None
+    try:
+        trx_rseg_history_len = int(kill_opt['trx_rseg_history_len'])
+        cur=conn.cursor()
+        sqlstr='select count from information_schema.innodb_metrics   where name = %s'
+        cur.execute(sqlstr,'trx_rseg_history_len')
+        i=cur.fetchone()
+
+        if i[0]>=trx_rseg_history_len:
+            snapshot_html=get_more_info(conn,db_id)
+            sendemail(db_id, ' NOT KILLED', snapshot_html,'trx_rseg_history_len')
+            tim=datetime.datetime.now()
+        else:
+            print("DB check_trx_rseg_history_len  cnt:%d,config max cnt is:%d"%(i[0],trx_rseg_history_len))
+            logger.debug("DB check_trx_rseg_history_len  cnt:%d,config max cnt is:%d"%(i[0],trx_rseg_history_len))
+
+    except Exception as e:
+        logger.critical("Get active trx processlist connection error:%s",e)
+    finally:
+        cur.close()
+    return tim
 
 
 
@@ -485,11 +544,12 @@ def my_slowquery_kill(db_instance):
 
 
 
-
     kill_count = 0
     run_max_count_last = 0
     check_ping_wait = 0
     tims = None
+    tims_trx = None
+    tims_trx_history_len= None
     while True:
         db_commconfig = get_setttings("db_commconfig")
         # 获取具体的db_instance 选项kill
@@ -497,7 +557,6 @@ def my_slowquery_kill(db_instance):
 
         # 查看processlist连接的作为心跳
         # 如果数据库端 kill掉这个用户的连接，该实例检查则异常退出
-        print ("gaott5:",db_commconfig)
 
         if (db_commconfig['run_time_window'][0] < datetime.datetime.now().strftime("%H:%M") < db_commconfig['run_time_window'][1]) or len(db_commconfig['run_time_window']) == 0:
             run_max_count = int(db_commconfig['run_max_count'])
@@ -521,7 +580,7 @@ def my_slowquery_kill(db_instance):
                 try:
                     threads_tokill = get_processlist_kthreads(db_conns[db_commconfig['db_puser']], kill_opt, db_id)
                 except  Exception as   e:
-                    logger.error("db_puser  not connect to db  exit.......")
+                    logger.error("db_puser  not connect to db  exit.......error:%s",e)
                     return
 
                 kill_threads(threads_tokill, db_conns, db_id, db_commconfig)
@@ -533,8 +592,25 @@ def my_slowquery_kill(db_instance):
                 if tims ==None or (int((datetime.datetime.now()-tims).seconds)>=interval):
                     tims=check_act_session(conn, kill_opt, db_id)
                 else:
-                    print("last check time is:%s,interval:%d,next check after %d seconds." %(tims,interval,(interval-int((datetime.datetime.now()-tims).seconds))))
-                    logger.debug("last check time is:%s,interval:%d,next check after %d seconds." %(tims,interval,(interval-int((datetime.datetime.now()-tims).seconds))))
+                    print("DB active session last check time is:%s,interval:%d,next check after %d seconds." %(tims,interval,(interval-int((datetime.datetime.now()-tims).seconds))))
+                    logger.debug("DB active session last check time is:%s,interval:%d,next check after %d seconds." %(tims,interval,(interval-int((datetime.datetime.now()-tims).seconds))))
+
+                # begin check actie trx
+                interval_trx = int(kill_opt['active_trx_check_interval'])
+                if tims_trx == None or (int((datetime.datetime.now() - tims_trx).seconds) >= interval_trx):
+                    tims_trx = check_act_trx(conn, kill_opt, db_id)
+                else:
+                    print("DB active trx last check time is:%s,interval:%d,next check after %d seconds." % (tims_trx, interval_trx, (interval_trx - int((datetime.datetime.now() - tims_trx).seconds))))
+                    logger.debug("DB active trx last check time is:%s,interval:%d,next check after %d seconds." % (tims_trx, interval_trx, (interval_trx - int((datetime.datetime.now() - tims_trx).seconds))))
+
+                # begin check trx_rseg_history_len
+                interval_trx_history_len= int(kill_opt['trx_rseg_history_check_interval'])
+                if tims_trx_history_len == None or (int((datetime.datetime.now() - tims_trx_history_len).seconds) >= interval_trx_history_len):
+                    tims_trx_history_len = check_trx_rseg_history_len(conn, kill_opt, db_id)
+                else:
+                    print("DB trx_rseg_history_len last check time is:%s,interval:%d,next check after %d seconds." % (tims_trx_history_len, interval_trx_history_len, (interval_trx_history_len - int((datetime.datetime.now() - tims_trx_history_len).seconds))))
+                    logger.debug("DB trx_rseg_history_len last check time is:%s,interval:%d,next check after %d seconds." % (tims_trx_history_len, interval_trx_history_len, (interval_trx_history_len - int((datetime.datetime.now() - tims_trx_history_len).seconds))))
+
 
 
         else:
