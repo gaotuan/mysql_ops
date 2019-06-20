@@ -587,6 +587,7 @@ def my_slowquery_kill(db_instance):
 
                 kill_count += 1
                 run_max_count_last = run_max_count
+                conn = db_conns[db_commconfig['db_puser']]
                 #begin check actie session
                 interval=int(kill_opt['db_act_check_interval'])
                 if tims ==None or (int((datetime.datetime.now()-tims).seconds)>=interval):
