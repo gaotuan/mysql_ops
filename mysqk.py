@@ -1,6 +1,6 @@
-
+#! /usr/bin/env python3
 # coding: utf-8
-#/usr/bin/env python3
+
 import pymysql
 import os, sys, time, datetime
 import subprocess
