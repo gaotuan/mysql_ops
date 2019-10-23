@@ -1,0 +1,98 @@
+
+    <html><head>
+<style>
+.mytable table {
+    width:100%;
+    margin:15px 0;
+    border:0;
+}
+.mytable,.mytable th,.mytable td {
+    font-size:0.95em;
+    text-align:left;
+    padding:4px;
+    border-collapse:collapse;
+}
+.mytable th,.mytable td {
+    border: 1px solid #ffffff;
+    border-width:1px
+}
+.mytable th {
+    border: 1px solid #cde6fe;
+    border-width:1px 0 1px 0
+}
+.mytable td {
+    border: 1px solid #eeeeee;
+    border-width:1px 0 1px 0
+}
+.mytable tr {
+    border: 1px solid #ffffff;
+}
+.mytable tr:nth-child(odd){
+    background-color:#f7f7f7;
+}
+.mytable tr:nth-child(even){
+    background-color:#ffffff;
+}
+.mytable2 th, .mytable2 td {
+    border-width:1px 1 1px 1
+}
+</style>
+    </head><body>
+        <div>
+        <h2>Lock Waits Info:</h2>
+            <table class='mytable'>
+              <tr>
+                <th>trx_id</th>
+                <th>role</th>
+                <th>thread_id</th>
+                <th>dbuser</th>
+                <th>dbuser</th>
+                <th>trx_state</th>
+                <th>trx_operation_state</th>
+                <th>trx_rows_locked</th>
+                <th>trx_lock_structs</th>
+                <th>trx_started</th>
+                <th>duration</th>
+                <th>lock_mode</th>
+                <th>lock_type</th>
+                <th>lock_table</th>
+                <th>lock_index</th>
+                <th>lock_data</th>
+                <th>trx_query</th>
+                <th>blocking_trx_id</th>
+              </tr>
+              
+            </table>
+        </div><br/>
+
+        <div>
+        <h2>Processlist Info:</h2>
+            <table class='mytable'>
+              <tr>
+                <th>thread_id</th>
+                <th>user</th>
+                <th>host</th>
+                <th>db</th>
+                <th>command</th>
+                <th>time</th>
+                <th>state</th>
+                <th>info</th>
+              </tr>
+              <tr><td>2</td> <td>system user</td> <td></td> <td>None</td> <td>Connect</td> <td>4132718</td> <td>Slave has read all relay log; waiting for the slave I/O thread t</td> <td>None</td></tr> <tr><td>446519</td> <td>gaotuan</td> <td>172.16.2.118:54954</td> <td>None</td> <td>Sleep</td> <td>101</td> <td></td> <td>None</td></tr> <tr><td>446520</td> <td>xydba_gtt</td> <td>172.16.2.118:54955</td> <td>None</td> <td>Query</td> <td>0</td> <td>executing</td> <td>select * from information_schema.processlist</td></tr> <tr><td>446525</td> <td>gaotuan</td> <td>localhost</td> <td>None</td> <td>Sleep</td> <td>35</td> <td></td> <td>None</td></tr> <tr><td>152385</td> <td>event_scheduler</td> <td>localhost</td> <td>None</td> <td>Daemon</td> <td>51</td> <td>Waiting for next activation</td> <td>None</td></tr>
+            </table>
+        </div><br/>
+
+        <div>
+        <h2>InnoDB Status:</h2>
+            <table class='mytable mytable2'>
+              <tr>
+                <th>thread_id</th>
+              </tr>
+              <tr><td>
+                <br/>=====================================<br/>2019-08-15 09:58:51 7f9bc3057700 INNODB MONITOR OUTPUT<br/>=====================================<br/>Per second averages calculated from the last 40 seconds<br/>-----------------<br/>BACKGROUND THREAD<br/>-----------------<br/>srv_master_thread loops: 27 srv_active, 0 srv_shutdown, 4129358 srv_idle<br/>srv_master_thread log flush and writes: 4129385<br/>----------<br/>SEMAPHORES<br/>----------<br/>OS WAIT ARRAY INFO: reservation count 67<br/>OS WAIT ARRAY INFO: signal count 66<br/>Mutex spin waits 6, rounds 180, OS waits 5<br/>RW-shared spins 54, rounds 1920, OS waits 62<br/>RW-excl spins 0, rounds 0, OS waits 0<br/>Spin rounds per wait: 30.00 mutex, 35.56 RW-shared, 0.00 RW-excl<br/>------------<br/>TRANSACTIONS<br/>------------<br/>Trx id counter 27610829<br/>Purge done for trx's n:o < 27610829 undo n:o < 0 state: running but idle<br/>History list length 85<br/>LIST OF TRANSACTIONS FOR EACH SESSION:<br/>---TRANSACTION 0, not started<br/>MySQL thread id 446520, OS thread handle 0x7f9bc3057700, query id 43728 172.16.2.118 xydba_gtt init<br/>show engine innodb status<br/>--------<br/>FILE I/O<br/>--------<br/>I/O thread 0 state: waiting for completed aio requests (insert buffer thread)<br/>I/O thread 1 state: waiting for completed aio requests (log thread)<br/>I/O thread 2 state: waiting for completed aio requests (read thread)<br/>I/O thread 3 state: waiting for completed aio requests (read thread)<br/>I/O thread 4 state: waiting for completed aio requests (read thread)<br/>I/O thread 5 state: waiting for completed aio requests (read thread)<br/>I/O thread 6 state: waiting for completed aio requests (write thread)<br/>I/O thread 7 state: waiting for completed aio requests (write thread)<br/>I/O thread 8 state: waiting for completed aio requests (write thread)<br/>I/O thread 9 state: waiting for completed aio requests (write thread)<br/>Pending normal aio reads: 0 [0, 0, 0, 0] , aio writes: 0 [0, 0, 0, 0] ,<br/> ibuf aio reads: 0, log i/o's: 0, sync i/o's: 0<br/>Pending flushes (fsync) log: 0; buffer pool: 0<br/>1698 OS file reads, 2780 OS file writes, 434 OS fsyncs<br/>0.00 reads/s, 0 avg bytes/read, 0.00 writes/s, 0.00 fsyncs/s<br/>-------------------------------------<br/>INSERT BUFFER AND ADAPTIVE HASH INDEX<br/>-------------------------------------<br/>Ibuf: size 1, free list len 295, seg size 297, 0 merges<br/>merged operations:<br/> insert 0, delete mark 0, delete 0<br/>discarded operations:<br/> insert 0, delete mark 0, delete 0<br/>Hash table size 276671, node heap has 2 buffer(s)<br/>0.00 hash searches/s, 0.00 non-hash searches/s<br/>---<br/>LOG<br/>---<br/>Log sequence number 86956601747<br/>Log flushed up to   86956601747<br/>Pages flushed up to 86956601747<br/>Last checkpoint at  86956601747<br/>0 pending log writes, 0 pending chkp writes<br/>152 log i/o's done, 0.00 log i/o's/second<br/>----------------------<br/>BUFFER POOL AND MEMORY<br/>----------------------<br/>Total memory allocated 137363456; in additional pool allocated 0<br/>Dictionary memory allocated 94558<br/>Buffer pool size   8191<br/>Free buffers       4982<br/>Database pages     3207<br/>Old database pages 1163<br/>Modified db pages  0<br/>Pending reads 0<br/>Pending writes: LRU 0, flush list 0, single page 0<br/>Pages made young 82, not young 0<br/>0.00 youngs/s, 0.00 non-youngs/s<br/>Pages read 1257, created 1954, written 2314<br/>0.00 reads/s, 0.00 creates/s, 0.00 writes/s<br/>No buffer pool page gets since the last printout<br/>Pages read ahead 0.00/s, evicted without access 0.00/s, Random read ahead 0.00/s<br/>LRU len: 3207, unzip_LRU len: 0<br/>I/O sum[0]:cur[0], unzip sum[0]:cur[0]<br/>--------------<br/>ROW OPERATIONS<br/>--------------<br/>0 queries inside InnoDB, 0 queries in queue<br/>0 read views open inside InnoDB<br/>Main thread process no. 1520, id 140306930484992, state: sleeping<br/>Number of rows inserted 121, updated 0, deleted 1, read 178017<br/>0.00 inserts/s, 0.00 updates/s, 0.00 deletes/s, 0.00 reads/s<br/>----------------------------<br/>END OF INNODB MONITOR OUTPUT<br/>============================<br/>
+              </td></tr>
+            </table>
+        </div><br/>
+
+    </body></html>
+    

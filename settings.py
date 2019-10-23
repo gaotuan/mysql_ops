@@ -1,6 +1,6 @@
 __author__ = 'gaott'
 
-DB_AUTH = "xx:xx","xxxx:xx"
+DB_AUTH = "gaotuan:72e8e02b4abeee2317856b8a232efb6e","xydba_gtt:72e8e02b4abeee2317856b8a232efb6e"
 
 # configuration file read interval, 10s
 CHECK_CONFIG_INTERVAL = 20

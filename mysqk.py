@@ -426,6 +426,7 @@ def check_act_session(conn,kill_opt,db_id):
                 tim=datetime.datetime.now()
             else:
                 print("DB active session cnt:%d,config max cnt is:%d"%(i[0],max_cnt))
+                logger.debug("DB active session cnt:%d,config max cnt is:%d"%(i[0],max_cnt))
 
     except Exception as e:
         logger.critical("Get active session processlist connection error:%s",e)
