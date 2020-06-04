@@ -1,0 +1,209 @@
+2020-06-04 15:12:53,699 [INFO   ] xjp-applog >> Starting kill query Thread: xjp-applog
+2020-06-04 15:12:53,788 [DEBUG  ] xjp-applog >> connection is created: 172.16.3.187:3306  gaotuan
+2020-06-04 15:12:53,865 [DEBUG  ] xjp-applog >> connection is created: 172.16.3.187:3306  xydba_gtt
+2020-06-04 15:12:53,868 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:12:53,868 [INFO   ] xjp-applog >> you've changed run_max_count, set a clean start
+2020-06-04 15:12:53,870 [WARNING] xjp-applog >> you've set run_max_count=999 , always check processlist
+2020-06-04 15:12:53,870 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:12:53,890 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:12:53,890 [DEBUG  ] xjp-applog >> no threads need to be kill
+2020-06-04 15:12:53,891 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:12:53,912 [DEBUG  ] xjp-applog >> DB active session cnt:1,config max cnt is:40
+2020-06-04 15:12:53,912 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:12:53,932 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:12:53,932 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:12:53,957 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:13:13,962 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:13:13,965 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:13:13,965 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:13:13,986 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:13:13,986 [DEBUG  ] xjp-applog >> no threads need to be kill
+2020-06-04 15:13:13,987 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:13:14,005 [DEBUG  ] xjp-applog >> DB active session cnt:1,config max cnt is:40
+2020-06-04 15:13:14,005 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:13:14,022 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:13:14,022 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:13:14,041 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:13:34,046 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:13:34,048 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:13:34,049 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:13:34,069 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:13:34,070 [DEBUG  ] xjp-applog >> no threads need to be kill
+2020-06-04 15:13:34,070 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:13:34,089 [DEBUG  ] xjp-applog >> DB active session cnt:1,config max cnt is:40
+2020-06-04 15:13:34,089 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:13:34,106 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:13:34,107 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:13:34,129 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:13:44,139 [INFO   ] xjp-applog >> Starting kill query Thread: xjp-applog
+2020-06-04 15:13:44,225 [DEBUG  ] xjp-applog >> connection is created: 172.16.3.187:3306  gaotuan
+2020-06-04 15:13:44,296 [DEBUG  ] xjp-applog >> connection is created: 172.16.3.187:3306  xydba_gtt
+2020-06-04 15:13:44,298 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:13:44,299 [INFO   ] xjp-applog >> you've changed run_max_count, set a clean start
+2020-06-04 15:13:44,300 [WARNING] xjp-applog >> you've set run_max_count=999 , always check processlist
+2020-06-04 15:13:44,300 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:13:44,322 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:13:44,323 [DEBUG  ] xjp-applog >> no threads need to be kill
+2020-06-04 15:13:44,323 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:13:44,341 [DEBUG  ] xjp-applog >> DB active session cnt:1,config max cnt is:40
+2020-06-04 15:13:44,341 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:13:44,358 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:13:44,359 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:13:44,377 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:14:04,382 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:14:04,384 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:14:04,384 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:14:04,405 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:14:04,405 [DEBUG  ] xjp-applog >> no threads need to be kill
+2020-06-04 15:14:04,406 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:14:04,423 [DEBUG  ] xjp-applog >> DB active session cnt:1,config max cnt is:40
+2020-06-04 15:14:04,424 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:14:04,441 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:14:04,441 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:14:04,459 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:14:24,463 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:14:24,465 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:14:24,465 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:14:24,487 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:14:24,487 [DEBUG  ] xjp-applog >> this threads COULD be killed: defaultdict(<class 'list'>, {'gaotuan': [7021]})
+2020-06-04 15:14:24,487 [INFO   ] xjp-applog >> Gather info before kill using the same connection START
+2020-06-04 15:14:24,488 [DEBUG  ] xjp-applog >> Get 'show full processlist' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:14:24,513 [DEBUG  ] xjp-applog >> Get 'innodb_lock_waits' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:14:24,541 [DEBUG  ] xjp-applog >> Get 'show engine innodb status' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:14:24,564 [INFO   ] xjp-applog >> (gaotuan) run in dry_run=0 mode , do really kill, but the status snapshot is taken
+2020-06-04 15:14:24,584 [INFO   ] xjp-applog >> (gaotuan) kill-command has been executed : kill 7021
+2020-06-04 15:14:24,899 [CRITICAL] xjp-applog >> Error email content:(535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256') ::slow_query
+2020-06-04 15:14:24,899 [CRITICAL] xjp-applog >> Error: 发送邮件失败(535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2020-06-04 15:14:24,933 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:14:24,957 [DEBUG  ] xjp-applog >> DB active session cnt:2,config max cnt is:40
+2020-06-04 15:14:24,957 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:14:24,978 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:14:24,978 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:14:24,999 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:14:45,006 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:14:45,010 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:14:45,011 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:14:45,033 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:14:45,034 [DEBUG  ] xjp-applog >> this threads COULD be killed: defaultdict(<class 'list'>, {'gaotuan': [7022]})
+2020-06-04 15:14:45,034 [INFO   ] xjp-applog >> Gather info before kill using the same connection START
+2020-06-04 15:14:45,034 [DEBUG  ] xjp-applog >> Get 'show full processlist' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:14:45,052 [DEBUG  ] xjp-applog >> Get 'innodb_lock_waits' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:14:45,073 [DEBUG  ] xjp-applog >> Get 'show engine innodb status' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:14:45,094 [INFO   ] xjp-applog >> (gaotuan) run in dry_run=0 mode , do really kill, but the status snapshot is taken
+2020-06-04 15:14:45,113 [INFO   ] xjp-applog >> (gaotuan) kill-command has been executed : kill 7022
+2020-06-04 15:14:45,398 [CRITICAL] xjp-applog >> Error email content:(535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256') ::slow_query
+2020-06-04 15:14:45,399 [CRITICAL] xjp-applog >> Error: 发送邮件失败(535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2020-06-04 15:14:45,439 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:14:45,456 [DEBUG  ] xjp-applog >> DB active session cnt:1,config max cnt is:40
+2020-06-04 15:14:45,456 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:14:45,475 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:14:45,475 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:14:45,493 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:15:05,498 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:15:05,501 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:15:05,501 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:15:05,520 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:15:05,520 [DEBUG  ] xjp-applog >> no threads need to be kill
+2020-06-04 15:15:05,521 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:15:05,539 [DEBUG  ] xjp-applog >> DB active session cnt:1,config max cnt is:40
+2020-06-04 15:15:05,540 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:15:05,557 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:15:05,557 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:15:05,574 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:15:25,577 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:15:25,579 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:15:25,579 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:15:25,598 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:15:25,599 [DEBUG  ] xjp-applog >> no threads need to be kill
+2020-06-04 15:15:25,599 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:15:25,616 [DEBUG  ] xjp-applog >> DB active session cnt:1,config max cnt is:40
+2020-06-04 15:15:25,616 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:15:25,633 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:15:25,634 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:15:25,652 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:15:45,658 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:15:45,661 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:15:45,661 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:15:45,686 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:15:45,687 [DEBUG  ] xjp-applog >> this threads COULD be killed: defaultdict(<class 'list'>, {'gaotuan': [7026, 7027]})
+2020-06-04 15:15:45,687 [INFO   ] xjp-applog >> Gather info before kill using the same connection START
+2020-06-04 15:15:45,687 [DEBUG  ] xjp-applog >> Get 'show full processlist' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:15:45,709 [DEBUG  ] xjp-applog >> Get 'innodb_lock_waits' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:15:45,735 [DEBUG  ] xjp-applog >> Get 'show engine innodb status' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:15:45,763 [INFO   ] xjp-applog >> (gaotuan) run in dry_run=0 mode , do really kill, but the status snapshot is taken
+2020-06-04 15:15:45,789 [ERROR  ] xjp-applog >> connection:gaotuan not exists:(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'kill 7027' at line 1")
+2020-06-04 15:15:46,039 [CRITICAL] xjp-applog >> Error email content:(535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256') ::slow_query
+2020-06-04 15:15:46,039 [CRITICAL] xjp-applog >> Error: 发送邮件失败(535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2020-06-04 15:15:46,077 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:15:46,098 [DEBUG  ] xjp-applog >> DB active session cnt:3,config max cnt is:40
+2020-06-04 15:15:46,098 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:15:46,187 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:15:46,188 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:15:46,220 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:16:06,227 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:16:06,230 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:16:06,230 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:16:06,255 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:16:06,256 [DEBUG  ] xjp-applog >> this threads COULD be killed: defaultdict(<class 'list'>, {'gaotuan': [7026, 7027]})
+2020-06-04 15:16:06,256 [INFO   ] xjp-applog >> Gather info before kill using the same connection START
+2020-06-04 15:16:06,256 [DEBUG  ] xjp-applog >> Get 'show full processlist' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:16:06,281 [DEBUG  ] xjp-applog >> Get 'innodb_lock_waits' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:16:06,304 [DEBUG  ] xjp-applog >> Get 'show engine innodb status' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:16:06,327 [INFO   ] xjp-applog >> (gaotuan) run in dry_run=0 mode , do really kill, but the status snapshot is taken
+2020-06-04 15:16:06,349 [ERROR  ] xjp-applog >> connection:gaotuan not exists:(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'kill 7027' at line 1")
+2020-06-04 15:16:06,649 [CRITICAL] xjp-applog >> Error email content:(535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256') ::slow_query
+2020-06-04 15:16:06,649 [CRITICAL] xjp-applog >> Error: 发送邮件失败(535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2020-06-04 15:16:06,705 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:16:06,726 [DEBUG  ] xjp-applog >> DB active session cnt:3,config max cnt is:40
+2020-06-04 15:16:06,727 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:16:06,749 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:16:06,749 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:16:06,769 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:16:15,430 [INFO   ] xjp-applog >> Starting kill query Thread: xjp-applog
+2020-06-04 15:16:15,542 [DEBUG  ] xjp-applog >> connection is created: 172.16.3.187:3306  gaotuan
+2020-06-04 15:16:15,623 [DEBUG  ] xjp-applog >> connection is created: 172.16.3.187:3306  xydba_gtt
+2020-06-04 15:16:15,628 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:16:15,629 [INFO   ] xjp-applog >> you've changed run_max_count, set a clean start
+2020-06-04 15:16:15,631 [WARNING] xjp-applog >> you've set run_max_count=999 , always check processlist
+2020-06-04 15:16:15,631 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:16:15,655 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:16:15,655 [DEBUG  ] xjp-applog >> this threads COULD be killed: defaultdict(<class 'list'>, {'gaotuan': [7026, 7027]})
+2020-06-04 15:16:15,655 [INFO   ] xjp-applog >> Gather info before kill using the same connection START
+2020-06-04 15:16:15,655 [DEBUG  ] xjp-applog >> Get 'show full processlist' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:16:15,679 [DEBUG  ] xjp-applog >> Get 'innodb_lock_waits' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:16:15,707 [DEBUG  ] xjp-applog >> Get 'show engine innodb status' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:16:15,732 [INFO   ] xjp-applog >> (gaotuan) run in dry_run=0 mode , do really kill, but the status snapshot is taken
+2020-06-04 15:16:15,753 [ERROR  ] xjp-applog >> connection:gaotuan not exists:(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'kill 7027' at line 1")
+2020-06-04 15:16:16,014 [CRITICAL] xjp-applog >> Error email content:(535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256') ::slow_query
+2020-06-04 15:16:16,014 [CRITICAL] xjp-applog >> Error: 发送邮件失败(535, b'Error: \xc7\xeb\xca\xb9\xd3\xc3\xca\xda\xc8\xa8\xc2\xeb\xb5\xc7\xc2\xbc\xa1\xa3\xcf\xea\xc7\xe9\xc7\xeb\xbf\xb4: http://service.mail.qq.com/cgi-bin/help?subtype=1&&id=28&&no=1001256')
+2020-06-04 15:16:16,047 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:16:16,065 [DEBUG  ] xjp-applog >> DB active session cnt:3,config max cnt is:40
+2020-06-04 15:16:16,066 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:16:16,087 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:16:16,088 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:16:16,107 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:16:36,112 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:16:36,117 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:16:36,117 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:16:36,142 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:16:36,142 [DEBUG  ] xjp-applog >> no threads need to be kill
+2020-06-04 15:16:36,143 [DEBUG  ] xjp-applog >> begin check active session  from  information_schema.processlist
+2020-06-04 15:16:36,165 [DEBUG  ] xjp-applog >> DB active session cnt:3,config max cnt is:40
+2020-06-04 15:16:36,165 [DEBUG  ] xjp-applog >> begin check active trx  from  information_schema.INNODB_TRX
+2020-06-04 15:16:36,184 [DEBUG  ] xjp-applog >> active session trx cnt:0,config max cnt is:5
+2020-06-04 15:16:36,185 [DEBUG  ] xjp-applog >> begin check check_trx_rseg_history_len from  information_schema.innodb_metrics
+2020-06-04 15:16:36,206 [DEBUG  ] xjp-applog >> DB check_trx_rseg_history_len  cnt:1122,config max cnt is:5000
+2020-06-04 15:16:47,791 [INFO   ] xjp-applog >> Starting kill query Thread: xjp-applog
+2020-06-04 15:16:47,905 [DEBUG  ] xjp-applog >> connection is created: 172.16.3.187:3306  gaotuan
+2020-06-04 15:16:48,006 [DEBUG  ] xjp-applog >> connection is created: 172.16.3.187:3306  xydba_gtt
+2020-06-04 15:16:48,012 [DEBUG  ] xjp-applog >> no section id_xjp-applog found in mysqk.ini, use comm section
+2020-06-04 15:16:48,013 [INFO   ] xjp-applog >> you've changed run_max_count, set a clean start
+2020-06-04 15:16:48,015 [WARNING] xjp-applog >> you've set run_max_count=999 , always check processlist
+2020-06-04 15:16:48,016 [DEBUG  ] xjp-applog >> get the information_schema.processlist on this moment: D:\deploy\test3\mykill\processlist_xjp-applog.txt
+2020-06-04 15:16:48,044 [INFO   ] xjp-applog >> check this conn thread according to kill_opt one by one
+2020-06-04 15:16:48,045 [DEBUG  ] xjp-applog >> this threads COULD be killed: defaultdict(<class 'list'>, {'gaotuan': [7026, 7027]})
+2020-06-04 15:32:02,926 [INFO   ] xjp-applog >> Gather info before kill using the same connection START
+2020-06-04 15:32:02,929 [DEBUG  ] xjp-applog >> Get 'show full processlist' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:32:02,953 [DEBUG  ] xjp-applog >> Get 'innodb_lock_waits' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:32:02,978 [DEBUG  ] xjp-applog >> Get 'show engine innodb status' to: D:\deploy\test3\mykill\snapshot_xjp-applog.txt
+2020-06-04 15:32:03,921 [INFO   ] xjp-applog >> (gaotuan) run in dry_run=0 mode , do really kill, but the status snapshot is taken

@@ -309,7 +309,7 @@ def kill_threads(threads_tokill, db_conns, db_id, db_commconfig):
 
     # 记录需要被 kill 的 thread_id,主要用于判断是否重复发邮件
     for u, t_id in threads_tokill.items():
-        kill_str = ";  ".join("kill %d" % t for t in t_id)
+        kill_str = ";  ".join("kill %d" % t for t in t_id)+';'
         thread_ids = set(t_id)
 
         # 明确设置dry_run=0才真正kill
@@ -319,11 +319,12 @@ def kill_threads(threads_tokill, db_conns, db_id, db_commconfig):
                 logger.info("(%s) run in dry_run=0 mode , do really kill, but the status snapshot is taken", u)
                 try:
                     cur = db_conns[u].cursor()
-                    cur.execute(kill_str)
-                    logger.warn("(%s) kill-command has been executed : %s", u, kill_str)
+                    for i in t_id:
+                        cur.execute('kill '+str(i))
+                    logger.info("(%s) kill-command has been executed : %s", u, kill_str)
                     sendemail(db_id, ' (' + u + ') KILLED', snapshot_html)
                 except Exception as e:
-                    logger.error("connection:%s not exists", u)
+                    logger.error("connection:%s not exists:%s", u,e)
                     sendemail(db_id, ' (' + u + ') Not KILLED,connection not exists ', snapshot_html)
 
             except pymysql.err.MySQLError as  e:
