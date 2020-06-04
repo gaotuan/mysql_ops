@@ -462,3 +462,766 @@ Number of rows inserted 121, updated 0, deleted 1, read 178017
 ----------------------------
 END OF INNODB MONITOR OUTPUT
 ============================
+
+
+######################################################
+##############  Thu Jun  4 15:14:24 2020  ##############
+######################################################
+
+######## show full processlist : ########
+[[ 7016,	gaotuan,	121.52.226.236:22325,	None,	Sleep,	1,	,	None ]]
+[[ 7017,	gaotuan,	121.52.226.236:22516,	None,	Sleep,	1,	,	None ]]
+[[ 7019,	gaotuan,	172.16.2.118:51566,	None,	Sleep,	40,	,	None ]]
+[[ 7022,	gaotuan,	localhost,	Yearning,	Query,	3,	User sleep,	select sleep(50) ]]
+[[ 7021,	gaotuan,	localhost,	Yearning,	Query,	15,	User sleep,	select sleep(50) ]]
+[[ 7018,	gaotuan,	121.52.226.236:22616,	None,	Sleep,	1,	,	None ]]
+[[ 6986,	gaotuan,	localhost:53476,	canal_manager,	Sleep,	3,	,	None ]]
+[[ 5949,	gaotuan,	121.52.226.236:28527,	None,	Sleep,	0,	,	None ]]
+[[ 7020,	xydba_gtt,	172.16.2.118:51568,	None,	Query,	0,	executing,	select * from information_schema.processlist ]]
+
+
+######## innodb_lock_waits : ########
+trx_id, role, thread_id, dbuser, host_remote, trx_state, trx_operation_state, trx_rows_locked, trx_lock_structs, trx_started, duration, lock_mode, lock_type, lock_table, lock_index, lock_data, trx_query, blocking_trx_id
+
+
+######## show engine innodb status : ########
+
+=====================================
+2020-06-04 15:14:25 7ff7080b6700 INNODB MONITOR OUTPUT
+=====================================
+Per second averages calculated from the last 3 seconds
+-----------------
+BACKGROUND THREAD
+-----------------
+srv_master_thread loops: 50 srv_active, 0 srv_shutdown, 1286002 srv_idle
+srv_master_thread log flush and writes: 1286029
+----------
+SEMAPHORES
+----------
+OS WAIT ARRAY INFO: reservation count 7542
+OS WAIT ARRAY INFO: signal count 7542
+Mutex spin waits 58, rounds 1830, OS waits 20
+RW-shared spins 7520, rounds 225600, OS waits 7518
+RW-excl spins 2, rounds 120, OS waits 3
+Spin rounds per wait: 31.55 mutex, 30.00 RW-shared, 60.00 RW-excl
+------------
+TRANSACTIONS
+------------
+Trx id counter 73181684
+Purge done for trx's n:o < 72986355 undo n:o < 0 state: running but idle
+History list length 1122
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 0, not started
+MySQL thread id 7020, OS thread handle 0x7ff7080b6700, query id 8517842 172.16.2.118 xydba_gtt init
+show engine innodb status
+---TRANSACTION 0, not started
+MySQL thread id 7018, OS thread handle 0x7ff7080f8700, query id 8517835 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7016, OS thread handle 0x7ff70a790700, query id 8517836 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7017, OS thread handle 0x7ff70a646700, query id 8517837 121.52.226.236 gaotuan
+---TRANSACTION 73181683, not started
+MySQL thread id 6986, OS thread handle 0x7ff700451700, query id 8517833 localhost 127.0.0.1 gaotuan
+--------
+FILE I/O
+--------
+I/O thread 0 state: waiting for completed aio requests (insert buffer thread)
+I/O thread 1 state: waiting for completed aio requests (log thread)
+I/O thread 2 state: waiting for completed aio requests (read thread)
+I/O thread 3 state: waiting for completed aio requests (read thread)
+I/O thread 4 state: waiting for completed aio requests (read thread)
+I/O thread 5 state: waiting for completed aio requests (read thread)
+I/O thread 6 state: waiting for completed aio requests (write thread)
+I/O thread 7 state: waiting for completed aio requests (write thread)
+I/O thread 8 state: waiting for completed aio requests (write thread)
+I/O thread 9 state: waiting for completed aio requests (write thread)
+Pending normal aio reads: 0 [0, 0, 0, 0] , aio writes: 0 [0, 0, 0, 0] ,
+ ibuf aio reads: 0, log i/o's: 0, sync i/o's: 0
+Pending flushes (fsync) log: 0; buffer pool: 0
+8018 OS file reads, 30299 OS file writes, 30167 OS fsyncs
+0.00 reads/s, 0 avg bytes/read, 0.00 writes/s, 0.00 fsyncs/s
+-------------------------------------
+INSERT BUFFER AND ADAPTIVE HASH INDEX
+-------------------------------------
+Ibuf: size 1, free list len 2450, seg size 2452, 0 merges
+merged operations:
+ insert 0, delete mark 0, delete 0
+discarded operations:
+ insert 0, delete mark 0, delete 0
+Hash table size 276671, node heap has 21 buffer(s)
+2.67 hash searches/s, 0.00 non-hash searches/s
+---
+LOG
+---
+Log sequence number 106930719323
+Log flushed up to   106930719323
+Pages flushed up to 106930719323
+Last checkpoint at  106930719323
+0 pending log writes, 0 pending chkp writes
+15090 log i/o's done, 0.00 log i/o's/second
+----------------------
+BUFFER POOL AND MEMORY
+----------------------
+Total memory allocated 137363456; in additional pool allocated 0
+Dictionary memory allocated 14882752
+Buffer pool size   8191
+Free buffers       3195
+Database pages     4975
+Old database pages 1856
+Modified db pages  0
+Pending reads 0
+Pending writes: LRU 0, flush list 0, single page 0
+Pages made young 0, not young 0
+0.00 youngs/s, 0.00 non-youngs/s
+Pages read 4972, created 3, written 7698
+0.00 reads/s, 0.00 creates/s, 0.00 writes/s
+Buffer pool hit rate 1000 / 1000, young-making rate 0 / 1000 not 0 / 1000
+Pages read ahead 0.00/s, evicted without access 0.00/s, Random read ahead 0.00/s
+LRU len: 4975, unzip_LRU len: 0
+I/O sum[0]:cur[0], unzip sum[0]:cur[0]
+--------------
+ROW OPERATIONS
+--------------
+0 queries inside InnoDB, 0 queries in queue
+0 read views open inside InnoDB
+Main thread process no. 20862, id 140698900756224, state: sleeping
+Number of rows inserted 1, updated 49, deleted 0, read 1948539
+0.00 inserts/s, 0.00 updates/s, 0.00 deletes/s, 3.00 reads/s
+----------------------------
+END OF INNODB MONITOR OUTPUT
+============================
+
+
+######################################################
+##############  Thu Jun  4 15:14:45 2020  ##############
+######################################################
+
+######## show full processlist : ########
+[[ 7023,	gaotuan,	121.52.226.236:23939,	None,	Sleep,	2,	,	None ]]
+[[ 7024,	gaotuan,	121.52.226.236:24110,	None,	Sleep,	2,	,	None ]]
+[[ 7019,	gaotuan,	172.16.2.118:51566,	None,	Sleep,	21,	,	None ]]
+[[ 7022,	gaotuan,	localhost,	Yearning,	Query,	24,	User sleep,	select sleep(50) ]]
+[[ 7025,	gaotuan,	121.52.226.236:24192,	None,	Sleep,	2,	,	None ]]
+[[ 6986,	gaotuan,	localhost:53476,	canal_manager,	Sleep,	1,	,	None ]]
+[[ 5949,	gaotuan,	121.52.226.236:28527,	None,	Sleep,	1,	,	None ]]
+[[ 7020,	xydba_gtt,	172.16.2.118:51568,	None,	Query,	0,	executing,	select * from information_schema.processlist ]]
+
+
+######## innodb_lock_waits : ########
+trx_id, role, thread_id, dbuser, host_remote, trx_state, trx_operation_state, trx_rows_locked, trx_lock_structs, trx_started, duration, lock_mode, lock_type, lock_table, lock_index, lock_data, trx_query, blocking_trx_id
+
+
+######## show engine innodb status : ########
+
+=====================================
+2020-06-04 15:14:46 7ff7080b6700 INNODB MONITOR OUTPUT
+=====================================
+Per second averages calculated from the last 4 seconds
+-----------------
+BACKGROUND THREAD
+-----------------
+srv_master_thread loops: 50 srv_active, 0 srv_shutdown, 1286022 srv_idle
+srv_master_thread log flush and writes: 1286049
+----------
+SEMAPHORES
+----------
+OS WAIT ARRAY INFO: reservation count 7543
+OS WAIT ARRAY INFO: signal count 7543
+Mutex spin waits 58, rounds 1830, OS waits 20
+RW-shared spins 7521, rounds 225630, OS waits 7519
+RW-excl spins 2, rounds 120, OS waits 3
+Spin rounds per wait: 31.55 mutex, 30.00 RW-shared, 60.00 RW-excl
+------------
+TRANSACTIONS
+------------
+Trx id counter 73181726
+Purge done for trx's n:o < 72986355 undo n:o < 0 state: running but idle
+History list length 1122
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 0, not started
+MySQL thread id 7024, OS thread handle 0x7ff70813a700, query id 8518067 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7020, OS thread handle 0x7ff7080b6700, query id 8518083 172.16.2.118 xydba_gtt init
+show engine innodb status
+---TRANSACTION 73181725, not started
+MySQL thread id 6986, OS thread handle 0x7ff700451700, query id 8518079 localhost 127.0.0.1 gaotuan
+--------
+FILE I/O
+--------
+I/O thread 0 state: waiting for completed aio requests (insert buffer thread)
+I/O thread 1 state: waiting for completed aio requests (log thread)
+I/O thread 2 state: waiting for completed aio requests (read thread)
+I/O thread 3 state: waiting for completed aio requests (read thread)
+I/O thread 4 state: waiting for completed aio requests (read thread)
+I/O thread 5 state: waiting for completed aio requests (read thread)
+I/O thread 6 state: waiting for completed aio requests (write thread)
+I/O thread 7 state: waiting for completed aio requests (write thread)
+I/O thread 8 state: waiting for completed aio requests (write thread)
+I/O thread 9 state: waiting for completed aio requests (write thread)
+Pending normal aio reads: 0 [0, 0, 0, 0] , aio writes: 0 [0, 0, 0, 0] ,
+ ibuf aio reads: 0, log i/o's: 0, sync i/o's: 0
+Pending flushes (fsync) log: 0; buffer pool: 0
+8018 OS file reads, 30303 OS file writes, 30171 OS fsyncs
+0.00 reads/s, 0 avg bytes/read, 0.00 writes/s, 0.00 fsyncs/s
+-------------------------------------
+INSERT BUFFER AND ADAPTIVE HASH INDEX
+-------------------------------------
+Ibuf: size 1, free list len 2450, seg size 2452, 0 merges
+merged operations:
+ insert 0, delete mark 0, delete 0
+discarded operations:
+ insert 0, delete mark 0, delete 0
+Hash table size 276671, node heap has 21 buffer(s)
+2.50 hash searches/s, 0.00 non-hash searches/s
+---
+LOG
+---
+Log sequence number 106930719333
+Log flushed up to   106930719333
+Pages flushed up to 106930719333
+Last checkpoint at  106930719333
+0 pending log writes, 0 pending chkp writes
+15092 log i/o's done, 0.00 log i/o's/second
+----------------------
+BUFFER POOL AND MEMORY
+----------------------
+Total memory allocated 137363456; in additional pool allocated 0
+Dictionary memory allocated 14882752
+Buffer pool size   8191
+Free buffers       3195
+Database pages     4975
+Old database pages 1856
+Modified db pages  0
+Pending reads 0
+Pending writes: LRU 0, flush list 0, single page 0
+Pages made young 0, not young 0
+0.00 youngs/s, 0.00 non-youngs/s
+Pages read 4972, created 3, written 7699
+0.00 reads/s, 0.00 creates/s, 0.00 writes/s
+Buffer pool hit rate 1000 / 1000, young-making rate 0 / 1000 not 0 / 1000
+Pages read ahead 0.00/s, evicted without access 0.00/s, Random read ahead 0.00/s
+LRU len: 4975, unzip_LRU len: 0
+I/O sum[0]:cur[0], unzip sum[0]:cur[0]
+--------------
+ROW OPERATIONS
+--------------
+0 queries inside InnoDB, 0 queries in queue
+0 read views open inside InnoDB
+Main thread process no. 20862, id 140698900756224, state: sleeping
+Number of rows inserted 1, updated 49, deleted 0, read 1948585
+0.00 inserts/s, 0.00 updates/s, 0.00 deletes/s, 2.75 reads/s
+----------------------------
+END OF INNODB MONITOR OUTPUT
+============================
+
+
+######################################################
+##############  Thu Jun  4 15:15:45 2020  ##############
+######################################################
+
+######## show full processlist : ########
+[[ 7027,	gaotuan,	localhost,	Yearning,	Query,	15,	User sleep,	select sleep(50) ]]
+[[ 7030,	gaotuan,	121.52.226.236:26163,	None,	Sleep,	2,	,	None ]]
+[[ 7019,	gaotuan,	172.16.2.118:51566,	None,	Sleep,	60,	,	None ]]
+[[ 7028,	gaotuan,	121.52.226.236:26005,	None,	Sleep,	2,	,	None ]]
+[[ 7031,	gaotuan,	121.52.226.236:26260,	None,	Sleep,	2,	,	None ]]
+[[ 6986,	gaotuan,	localhost:53476,	canal_manager,	Sleep,	0,	,	None ]]
+[[ 5949,	gaotuan,	121.52.226.236:28527,	None,	Sleep,	1,	,	None ]]
+[[ 7026,	gaotuan,	localhost,	Yearning,	Query,	18,	User sleep,	select sleep(50) ]]
+[[ 7029,	gaotuan,	localhost,	Yearning,	Sleep,	8,	,	None ]]
+[[ 7020,	xydba_gtt,	172.16.2.118:51568,	None,	Query,	0,	executing,	select * from information_schema.processlist ]]
+
+
+######## innodb_lock_waits : ########
+trx_id, role, thread_id, dbuser, host_remote, trx_state, trx_operation_state, trx_rows_locked, trx_lock_structs, trx_started, duration, lock_mode, lock_type, lock_table, lock_index, lock_data, trx_query, blocking_trx_id
+
+
+######## show engine innodb status : ########
+
+=====================================
+2020-06-04 15:15:46 7ff7080b6700 INNODB MONITOR OUTPUT
+=====================================
+Per second averages calculated from the last 4 seconds
+-----------------
+BACKGROUND THREAD
+-----------------
+srv_master_thread loops: 50 srv_active, 0 srv_shutdown, 1286083 srv_idle
+srv_master_thread log flush and writes: 1286110
+----------
+SEMAPHORES
+----------
+OS WAIT ARRAY INFO: reservation count 7543
+OS WAIT ARRAY INFO: signal count 7543
+Mutex spin waits 58, rounds 1830, OS waits 20
+RW-shared spins 7521, rounds 225630, OS waits 7519
+RW-excl spins 2, rounds 120, OS waits 3
+Spin rounds per wait: 31.55 mutex, 30.00 RW-shared, 60.00 RW-excl
+------------
+TRANSACTIONS
+------------
+Trx id counter 73181846
+Purge done for trx's n:o < 72986355 undo n:o < 0 state: running but idle
+History list length 1122
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 0, not started
+MySQL thread id 7030, OS thread handle 0x7ff70a70c700, query id 8518795 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7020, OS thread handle 0x7ff7080b6700, query id 8518811 172.16.2.118 xydba_gtt init
+show engine innodb status
+---TRANSACTION 73181845, not started
+MySQL thread id 6986, OS thread handle 0x7ff700451700, query id 8518807 localhost 127.0.0.1 gaotuan
+--------
+FILE I/O
+--------
+I/O thread 0 state: waiting for completed aio requests (insert buffer thread)
+I/O thread 1 state: waiting for completed aio requests (log thread)
+I/O thread 2 state: waiting for completed aio requests (read thread)
+I/O thread 3 state: waiting for completed aio requests (read thread)
+I/O thread 4 state: waiting for completed aio requests (read thread)
+I/O thread 5 state: waiting for completed aio requests (read thread)
+I/O thread 6 state: waiting for completed aio requests (write thread)
+I/O thread 7 state: waiting for completed aio requests (write thread)
+I/O thread 8 state: waiting for completed aio requests (write thread)
+I/O thread 9 state: waiting for completed aio requests (write thread)
+Pending normal aio reads: 0 [0, 0, 0, 0] , aio writes: 0 [0, 0, 0, 0] ,
+ ibuf aio reads: 0, log i/o's: 0, sync i/o's: 0
+Pending flushes (fsync) log: 0; buffer pool: 0
+8018 OS file reads, 30303 OS file writes, 30171 OS fsyncs
+0.00 reads/s, 0 avg bytes/read, 0.00 writes/s, 0.00 fsyncs/s
+-------------------------------------
+INSERT BUFFER AND ADAPTIVE HASH INDEX
+-------------------------------------
+Ibuf: size 1, free list len 2450, seg size 2452, 0 merges
+merged operations:
+ insert 0, delete mark 0, delete 0
+discarded operations:
+ insert 0, delete mark 0, delete 0
+Hash table size 276671, node heap has 21 buffer(s)
+2.50 hash searches/s, 0.00 non-hash searches/s
+---
+LOG
+---
+Log sequence number 106930719333
+Log flushed up to   106930719333
+Pages flushed up to 106930719333
+Last checkpoint at  106930719333
+0 pending log writes, 0 pending chkp writes
+15092 log i/o's done, 0.00 log i/o's/second
+----------------------
+BUFFER POOL AND MEMORY
+----------------------
+Total memory allocated 137363456; in additional pool allocated 0
+Dictionary memory allocated 14882752
+Buffer pool size   8191
+Free buffers       3195
+Database pages     4975
+Old database pages 1856
+Modified db pages  0
+Pending reads 0
+Pending writes: LRU 0, flush list 0, single page 0
+Pages made young 0, not young 0
+0.00 youngs/s, 0.00 non-youngs/s
+Pages read 4972, created 3, written 7699
+0.00 reads/s, 0.00 creates/s, 0.00 writes/s
+Buffer pool hit rate 1000 / 1000, young-making rate 0 / 1000 not 0 / 1000
+Pages read ahead 0.00/s, evicted without access 0.00/s, Random read ahead 0.00/s
+LRU len: 4975, unzip_LRU len: 0
+I/O sum[0]:cur[0], unzip sum[0]:cur[0]
+--------------
+ROW OPERATIONS
+--------------
+0 queries inside InnoDB, 0 queries in queue
+0 read views open inside InnoDB
+Main thread process no. 20862, id 140698900756224, state: sleeping
+Number of rows inserted 1, updated 49, deleted 0, read 1948717
+0.00 inserts/s, 0.00 updates/s, 0.00 deletes/s, 2.75 reads/s
+----------------------------
+END OF INNODB MONITOR OUTPUT
+============================
+
+
+######################################################
+##############  Thu Jun  4 15:16:06 2020  ##############
+######################################################
+
+######## show full processlist : ########
+[[ 7027,	gaotuan,	localhost,	Yearning,	Query,	36,	User sleep,	select sleep(50) ]]
+[[ 7030,	gaotuan,	121.52.226.236:26163,	None,	Sleep,	4,	,	None ]]
+[[ 7019,	gaotuan,	172.16.2.118:51566,	None,	Sleep,	20,	,	None ]]
+[[ 7028,	gaotuan,	121.52.226.236:26005,	None,	Sleep,	3,	,	None ]]
+[[ 7031,	gaotuan,	121.52.226.236:26260,	None,	Sleep,	3,	,	None ]]
+[[ 6986,	gaotuan,	localhost:53476,	canal_manager,	Sleep,	1,	,	None ]]
+[[ 5949,	gaotuan,	121.52.226.236:28527,	None,	Sleep,	2,	,	None ]]
+[[ 7026,	gaotuan,	localhost,	Yearning,	Query,	39,	User sleep,	select sleep(50) ]]
+[[ 7029,	gaotuan,	localhost,	Yearning,	Sleep,	29,	,	None ]]
+[[ 7020,	xydba_gtt,	172.16.2.118:51568,	None,	Query,	0,	executing,	select * from information_schema.processlist ]]
+
+
+######## innodb_lock_waits : ########
+trx_id, role, thread_id, dbuser, host_remote, trx_state, trx_operation_state, trx_rows_locked, trx_lock_structs, trx_started, duration, lock_mode, lock_type, lock_table, lock_index, lock_data, trx_query, blocking_trx_id
+
+
+######## show engine innodb status : ########
+
+=====================================
+2020-06-04 15:16:07 7ff7080b6700 INNODB MONITOR OUTPUT
+=====================================
+Per second averages calculated from the last 5 seconds
+-----------------
+BACKGROUND THREAD
+-----------------
+srv_master_thread loops: 50 srv_active, 0 srv_shutdown, 1286103 srv_idle
+srv_master_thread log flush and writes: 1286130
+----------
+SEMAPHORES
+----------
+OS WAIT ARRAY INFO: reservation count 7543
+OS WAIT ARRAY INFO: signal count 7543
+Mutex spin waits 58, rounds 1830, OS waits 20
+RW-shared spins 7521, rounds 225630, OS waits 7519
+RW-excl spins 2, rounds 120, OS waits 3
+Spin rounds per wait: 31.55 mutex, 30.00 RW-shared, 60.00 RW-excl
+------------
+TRANSACTIONS
+------------
+Trx id counter 73181886
+Purge done for trx's n:o < 72986355 undo n:o < 0 state: running but idle
+History list length 1122
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 0, not started
+MySQL thread id 7028, OS thread handle 0x7ff70a646700, query id 8519066 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7031, OS thread handle 0x7ff70a6ca700, query id 8519067 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7030, OS thread handle 0x7ff70a70c700, query id 8519065 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7020, OS thread handle 0x7ff7080b6700, query id 8519081 172.16.2.118 xydba_gtt init
+show engine innodb status
+---TRANSACTION 73181885, not started
+MySQL thread id 6986, OS thread handle 0x7ff700451700, query id 8519077 localhost 127.0.0.1 gaotuan
+--------
+FILE I/O
+--------
+I/O thread 0 state: waiting for completed aio requests (insert buffer thread)
+I/O thread 1 state: waiting for completed aio requests (log thread)
+I/O thread 2 state: waiting for completed aio requests (read thread)
+I/O thread 3 state: waiting for completed aio requests (read thread)
+I/O thread 4 state: waiting for completed aio requests (read thread)
+I/O thread 5 state: waiting for completed aio requests (read thread)
+I/O thread 6 state: waiting for completed aio requests (write thread)
+I/O thread 7 state: waiting for completed aio requests (write thread)
+I/O thread 8 state: waiting for completed aio requests (write thread)
+I/O thread 9 state: waiting for completed aio requests (write thread)
+Pending normal aio reads: 0 [0, 0, 0, 0] , aio writes: 0 [0, 0, 0, 0] ,
+ ibuf aio reads: 0, log i/o's: 0, sync i/o's: 0
+Pending flushes (fsync) log: 0; buffer pool: 0
+8018 OS file reads, 30303 OS file writes, 30171 OS fsyncs
+0.00 reads/s, 0 avg bytes/read, 0.00 writes/s, 0.00 fsyncs/s
+-------------------------------------
+INSERT BUFFER AND ADAPTIVE HASH INDEX
+-------------------------------------
+Ibuf: size 1, free list len 2450, seg size 2452, 0 merges
+merged operations:
+ insert 0, delete mark 0, delete 0
+discarded operations:
+ insert 0, delete mark 0, delete 0
+Hash table size 276671, node heap has 21 buffer(s)
+2.00 hash searches/s, 0.00 non-hash searches/s
+---
+LOG
+---
+Log sequence number 106930719333
+Log flushed up to   106930719333
+Pages flushed up to 106930719333
+Last checkpoint at  106930719333
+0 pending log writes, 0 pending chkp writes
+15092 log i/o's done, 0.00 log i/o's/second
+----------------------
+BUFFER POOL AND MEMORY
+----------------------
+Total memory allocated 137363456; in additional pool allocated 0
+Dictionary memory allocated 14882752
+Buffer pool size   8191
+Free buffers       3195
+Database pages     4975
+Old database pages 1856
+Modified db pages  0
+Pending reads 0
+Pending writes: LRU 0, flush list 0, single page 0
+Pages made young 0, not young 0
+0.00 youngs/s, 0.00 non-youngs/s
+Pages read 4972, created 3, written 7699
+0.00 reads/s, 0.00 creates/s, 0.00 writes/s
+Buffer pool hit rate 1000 / 1000, young-making rate 0 / 1000 not 0 / 1000
+Pages read ahead 0.00/s, evicted without access 0.00/s, Random read ahead 0.00/s
+LRU len: 4975, unzip_LRU len: 0
+I/O sum[0]:cur[0], unzip sum[0]:cur[0]
+--------------
+ROW OPERATIONS
+--------------
+0 queries inside InnoDB, 0 queries in queue
+0 read views open inside InnoDB
+Main thread process no. 20862, id 140698900756224, state: sleeping
+Number of rows inserted 1, updated 49, deleted 0, read 1948761
+0.00 inserts/s, 0.00 updates/s, 0.00 deletes/s, 2.20 reads/s
+----------------------------
+END OF INNODB MONITOR OUTPUT
+============================
+
+
+######################################################
+##############  Thu Jun  4 15:16:15 2020  ##############
+######################################################
+
+######## show full processlist : ########
+[[ 7027,	gaotuan,	localhost,	Yearning,	Query,	45,	User sleep,	select sleep(50) ]]
+[[ 7030,	gaotuan,	121.52.226.236:26163,	None,	Sleep,	2,	,	None ]]
+[[ 7033,	xydba_gtt,	172.16.2.118:51655,	None,	Query,	0,	executing,	select * from information_schema.processlist ]]
+[[ 7028,	gaotuan,	121.52.226.236:26005,	None,	Sleep,	3,	,	None ]]
+[[ 7032,	gaotuan,	172.16.2.118:51654,	None,	Sleep,	0,	,	None ]]
+[[ 7031,	gaotuan,	121.52.226.236:26260,	None,	Sleep,	3,	,	None ]]
+[[ 6986,	gaotuan,	localhost:53476,	canal_manager,	Sleep,	0,	,	None ]]
+[[ 5949,	gaotuan,	121.52.226.236:28527,	None,	Sleep,	1,	,	None ]]
+[[ 7026,	gaotuan,	localhost,	Yearning,	Query,	48,	User sleep,	select sleep(50) ]]
+[[ 7029,	gaotuan,	localhost,	Yearning,	Sleep,	38,	,	None ]]
+
+
+######## innodb_lock_waits : ########
+trx_id, role, thread_id, dbuser, host_remote, trx_state, trx_operation_state, trx_rows_locked, trx_lock_structs, trx_started, duration, lock_mode, lock_type, lock_table, lock_index, lock_data, trx_query, blocking_trx_id
+
+
+######## show engine innodb status : ########
+
+=====================================
+2020-06-04 15:16:16 7ff700517700 INNODB MONITOR OUTPUT
+=====================================
+Per second averages calculated from the last 4 seconds
+-----------------
+BACKGROUND THREAD
+-----------------
+srv_master_thread loops: 50 srv_active, 0 srv_shutdown, 1286113 srv_idle
+srv_master_thread log flush and writes: 1286140
+----------
+SEMAPHORES
+----------
+OS WAIT ARRAY INFO: reservation count 7543
+OS WAIT ARRAY INFO: signal count 7543
+Mutex spin waits 58, rounds 1830, OS waits 20
+RW-shared spins 7521, rounds 225630, OS waits 7519
+RW-excl spins 2, rounds 120, OS waits 3
+Spin rounds per wait: 31.55 mutex, 30.00 RW-shared, 60.00 RW-excl
+------------
+TRANSACTIONS
+------------
+Trx id counter 73181906
+Purge done for trx's n:o < 72986355 undo n:o < 0 state: running but idle
+History list length 1122
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 0, not started
+MySQL thread id 7033, OS thread handle 0x7ff700517700, query id 8519200 172.16.2.118 xydba_gtt init
+show engine innodb status
+---TRANSACTION 0, not started
+MySQL thread id 7028, OS thread handle 0x7ff70a646700, query id 8519183 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7031, OS thread handle 0x7ff70a6ca700, query id 8519182 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7030, OS thread handle 0x7ff70a70c700, query id 8519184 121.52.226.236 gaotuan
+---TRANSACTION 73181905, not started
+MySQL thread id 6986, OS thread handle 0x7ff700451700, query id 8519194 localhost 127.0.0.1 gaotuan
+--------
+FILE I/O
+--------
+I/O thread 0 state: waiting for completed aio requests (insert buffer thread)
+I/O thread 1 state: waiting for completed aio requests (log thread)
+I/O thread 2 state: waiting for completed aio requests (read thread)
+I/O thread 3 state: waiting for completed aio requests (read thread)
+I/O thread 4 state: waiting for completed aio requests (read thread)
+I/O thread 5 state: waiting for completed aio requests (read thread)
+I/O thread 6 state: waiting for completed aio requests (write thread)
+I/O thread 7 state: waiting for completed aio requests (write thread)
+I/O thread 8 state: waiting for completed aio requests (write thread)
+I/O thread 9 state: waiting for completed aio requests (write thread)
+Pending normal aio reads: 0 [0, 0, 0, 0] , aio writes: 0 [0, 0, 0, 0] ,
+ ibuf aio reads: 0, log i/o's: 0, sync i/o's: 0
+Pending flushes (fsync) log: 0; buffer pool: 0
+8018 OS file reads, 30303 OS file writes, 30171 OS fsyncs
+0.00 reads/s, 0 avg bytes/read, 0.00 writes/s, 0.00 fsyncs/s
+-------------------------------------
+INSERT BUFFER AND ADAPTIVE HASH INDEX
+-------------------------------------
+Ibuf: size 1, free list len 2450, seg size 2452, 0 merges
+merged operations:
+ insert 0, delete mark 0, delete 0
+discarded operations:
+ insert 0, delete mark 0, delete 0
+Hash table size 276671, node heap has 21 buffer(s)
+2.50 hash searches/s, 0.00 non-hash searches/s
+---
+LOG
+---
+Log sequence number 106930719333
+Log flushed up to   106930719333
+Pages flushed up to 106930719333
+Last checkpoint at  106930719333
+0 pending log writes, 0 pending chkp writes
+15092 log i/o's done, 0.00 log i/o's/second
+----------------------
+BUFFER POOL AND MEMORY
+----------------------
+Total memory allocated 137363456; in additional pool allocated 0
+Dictionary memory allocated 14882752
+Buffer pool size   8191
+Free buffers       3195
+Database pages     4975
+Old database pages 1856
+Modified db pages  0
+Pending reads 0
+Pending writes: LRU 0, flush list 0, single page 0
+Pages made young 0, not young 0
+0.00 youngs/s, 0.00 non-youngs/s
+Pages read 4972, created 3, written 7699
+0.00 reads/s, 0.00 creates/s, 0.00 writes/s
+Buffer pool hit rate 1000 / 1000, young-making rate 0 / 1000 not 0 / 1000
+Pages read ahead 0.00/s, evicted without access 0.00/s, Random read ahead 0.00/s
+LRU len: 4975, unzip_LRU len: 0
+I/O sum[0]:cur[0], unzip sum[0]:cur[0]
+--------------
+ROW OPERATIONS
+--------------
+0 queries inside InnoDB, 0 queries in queue
+0 read views open inside InnoDB
+Main thread process no. 20862, id 140698900756224, state: sleeping
+Number of rows inserted 1, updated 49, deleted 0, read 1948783
+0.00 inserts/s, 0.00 updates/s, 0.00 deletes/s, 2.75 reads/s
+----------------------------
+END OF INNODB MONITOR OUTPUT
+============================
+
+
+######################################################
+##############  Thu Jun  4 15:32:02 2020  ##############
+######################################################
+
+######## show full processlist : ########
+[[ 7027,	gaotuan,	localhost,	Yearning,	Sleep,	930,	,	None ]]
+[[ 7084,	gaotuan,	121.52.226.236:55390,	None,	Sleep,	2,	,	None ]]
+[[ 7083,	gaotuan,	121.52.226.236:55290,	None,	Sleep,	2,	,	None ]]
+[[ 7038,	xydba_gtt,	172.16.2.118:51682,	None,	Query,	0,	executing,	select * from information_schema.processlist ]]
+[[ 7037,	gaotuan,	172.16.2.118:51681,	None,	Sleep,	915,	,	None ]]
+[[ 6986,	gaotuan,	localhost:53476,	canal_manager,	Sleep,	3,	,	None ]]
+[[ 5949,	gaotuan,	121.52.226.236:28527,	None,	Sleep,	3,	,	None ]]
+[[ 7026,	gaotuan,	localhost,	Yearning,	Sleep,	934,	,	None ]]
+[[ 7029,	gaotuan,	localhost,	Yearning,	Sleep,	986,	,	None ]]
+[[ 7082,	gaotuan,	121.52.226.236:55011,	None,	Sleep,	2,	,	None ]]
+
+
+######## innodb_lock_waits : ########
+trx_id, role, thread_id, dbuser, host_remote, trx_state, trx_operation_state, trx_rows_locked, trx_lock_structs, trx_started, duration, lock_mode, lock_type, lock_table, lock_index, lock_data, trx_query, blocking_trx_id
+
+
+######## show engine innodb status : ########
+
+=====================================
+2020-06-04 15:32:04 7ff70a6ca700 INNODB MONITOR OUTPUT
+=====================================
+Per second averages calculated from the last 3 seconds
+-----------------
+BACKGROUND THREAD
+-----------------
+srv_master_thread loops: 50 srv_active, 0 srv_shutdown, 1287059 srv_idle
+srv_master_thread log flush and writes: 1287086
+----------
+SEMAPHORES
+----------
+OS WAIT ARRAY INFO: reservation count 7551
+OS WAIT ARRAY INFO: signal count 7551
+Mutex spin waits 58, rounds 1830, OS waits 20
+RW-shared spins 7529, rounds 225870, OS waits 7527
+RW-excl spins 2, rounds 120, OS waits 3
+Spin rounds per wait: 31.55 mutex, 30.00 RW-shared, 60.00 RW-excl
+------------
+TRANSACTIONS
+------------
+Trx id counter 73183796
+Purge done for trx's n:o < 72986355 undo n:o < 0 state: running but idle
+History list length 1122
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 0, not started
+MySQL thread id 7038, OS thread handle 0x7ff70a6ca700, query id 8530332 172.16.2.118 xydba_gtt init
+show engine innodb status
+---TRANSACTION 0, not started
+MySQL thread id 7083, OS thread handle 0x7ff70a646700, query id 8530329 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7084, OS thread handle 0x7ff70813a700, query id 8530327 121.52.226.236 gaotuan
+---TRANSACTION 0, not started
+MySQL thread id 7082, OS thread handle 0x7ff708074700, query id 8530328 121.52.226.236 gaotuan
+---TRANSACTION 73183795, not started
+MySQL thread id 6986, OS thread handle 0x7ff700451700, query id 8530325 localhost 127.0.0.1 gaotuan
+--------
+FILE I/O
+--------
+I/O thread 0 state: waiting for completed aio requests (insert buffer thread)
+I/O thread 1 state: waiting for completed aio requests (log thread)
+I/O thread 2 state: waiting for completed aio requests (read thread)
+I/O thread 3 state: waiting for completed aio requests (read thread)
+I/O thread 4 state: waiting for completed aio requests (read thread)
+I/O thread 5 state: waiting for completed aio requests (read thread)
+I/O thread 6 state: waiting for completed aio requests (write thread)
+I/O thread 7 state: waiting for completed aio requests (write thread)
+I/O thread 8 state: waiting for completed aio requests (write thread)
+I/O thread 9 state: waiting for completed aio requests (write thread)
+Pending normal aio reads: 0 [0, 0, 0, 0] , aio writes: 0 [0, 0, 0, 0] ,
+ ibuf aio reads: 0, log i/o's: 0, sync i/o's: 0
+Pending flushes (fsync) log: 0; buffer pool: 0
+8018 OS file reads, 30335 OS file writes, 30203 OS fsyncs
+0.00 reads/s, 0 avg bytes/read, 0.00 writes/s, 0.00 fsyncs/s
+-------------------------------------
+INSERT BUFFER AND ADAPTIVE HASH INDEX
+-------------------------------------
+Ibuf: size 1, free list len 2450, seg size 2452, 0 merges
+merged operations:
+ insert 0, delete mark 0, delete 0
+discarded operations:
+ insert 0, delete mark 0, delete 0
+Hash table size 276671, node heap has 21 buffer(s)
+0.67 hash searches/s, 0.00 non-hash searches/s
+---
+LOG
+---
+Log sequence number 106930719413
+Log flushed up to   106930719413
+Pages flushed up to 106930719413
+Last checkpoint at  106930719413
+0 pending log writes, 0 pending chkp writes
+15108 log i/o's done, 0.00 log i/o's/second
+----------------------
+BUFFER POOL AND MEMORY
+----------------------
+Total memory allocated 137363456; in additional pool allocated 0
+Dictionary memory allocated 14882752
+Buffer pool size   8191
+Free buffers       3195
+Database pages     4975
+Old database pages 1856
+Modified db pages  0
+Pending reads 0
+Pending writes: LRU 0, flush list 0, single page 0
+Pages made young 0, not young 0
+0.00 youngs/s, 0.00 non-youngs/s
+Pages read 4972, created 3, written 7707
+0.00 reads/s, 0.00 creates/s, 0.00 writes/s
+Buffer pool hit rate 1000 / 1000, young-making rate 0 / 1000 not 0 / 1000
+Pages read ahead 0.00/s, evicted without access 0.00/s, Random read ahead 0.00/s
+LRU len: 4975, unzip_LRU len: 0
+I/O sum[0]:cur[0], unzip sum[0]:cur[0]
+--------------
+ROW OPERATIONS
+--------------
+0 queries inside InnoDB, 0 queries in queue
+0 read views open inside InnoDB
+Main thread process no. 20862, id 140698900756224, state: sleeping
+Number of rows inserted 1, updated 49, deleted 0, read 1950862
+0.00 inserts/s, 0.00 updates/s, 0.00 deletes/s, 0.67 reads/s
+----------------------------
+END OF INNODB MONITOR OUTPUT
+============================
