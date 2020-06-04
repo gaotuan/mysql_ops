@@ -320,12 +320,12 @@ def kill_threads(threads_tokill, db_conns, db_id, db_commconfig):
                 try:
                     cur = db_conns[u].cursor()
                     cur.execute(kill_str)
+                    logger.warn("(%s) kill-command has been executed : %s", u, kill_str)
                     sendemail(db_id, ' (' + u + ') KILLED', snapshot_html)
                 except Exception as e:
                     logger.error("connection:%s not exists", u)
                     sendemail(db_id, ' (' + u + ') Not KILLED,connection not exists ', snapshot_html)
 
-                logger.warn("(%s) kill-command has been executed : %s", u, kill_str)
             except pymysql.err.MySQLError as  e:
                 logger.critical('Error %d: %s', e.args[0], e.args[1])
                 cur.close()
